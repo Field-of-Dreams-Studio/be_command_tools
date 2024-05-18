@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>基岩版命令工具箱</title>
+
+    <link href="https://cdn.pmine.org/fdsprivate/pmine-bs.css" rel="stylesheet">
+    <link href="https://cdn.pmine.org/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-bottom: 100px;
+        }
+
+        #result {
+            /* min-width: 500px;
+            max-width: 2000px;
+            width: auto; */
+            height: 300px;
+            resize: none;
+        }
+
+        .box {
+            /* border: thick double #32a1ce;
+            border-radius: var(--bs-border-radius);
+            background-color: rgb(244, 244, 244);
+            padding: 20px; */
+            margin-bottom: 10px;
+            width: auto;
+        } 
+
+        .title {
+            /* font-weight: bold; */
+            margin-top: -7px;
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <datalist id="items">
+        <option value="minecraft:oak_planks" label="橡木板">
+        <option value="minecraft:spruce_planks" label="云杉木板">
+        <option value="minecraft:birch_planks" label="白桦木板">
+        <option value="minecraft:jungle_planks" label="丛林木板">
+        <option value="minecraft:acacia_planks" label="金合欢木板">
+        <option value="minecraft:dark_oak_planks" label="深色橡木板">
+        <option value="minecraft:mangrove_planks" label="红树木木板">
+        <option value="minecraft:cherry_planks" label="樱花木板">
+        <option value="minecraft:bamboo_planks" label="竹板">
+        <option value="minecraft:bamboo_mosaic" label="竹制马赛克">
+        <option value="minecraft:crimson_planks" label="绯红木板">
+        <option value="minecraft:warped_planks" label="诡异木板">
+        <option value="minecraft:cobblestone_wall" label="圆石墙">
+        <option value="minecraft:cobblestone_wall" label="苔石墙">
+        <option value="minecraft:cobblestone_wall" label="花岗岩墙">
+        <option value="minecraft:cobblestone_wall" label="闪长岩墙">
+        <option value="minecraft:cobblestone_wall" label="安山岩墙">
+        <option value="minecraft:cobblestone_wall" label="砂岩墙">
+        <option value="minecraft:cobblestone_wall" label="红砂岩墙">
+        <option value="minecraft:cobblestone_wall" label="石砖墙">
+        <option value="minecraft:cobblestone_wall" label="苔石砖墙">
+        <option value="minecraft:cobblestone_wall" label="砖墙">
+        <option value="minecraft:cobblestone_wall" label="下界砖墙">
+        <option value="minecraft:cobblestone_wall" label="红色下界砖墙">
+        <option value="minecraft:cobblestone_wall" label="末地石砖墙">
+        <option value="minecraft:cobblestone_wall" label="海晶石墙">
+        <option value="minecraft:blackstone_wall" label="黑石墙">
+        <option value="minecraft:polished_blackstone_brick_wall" label="磨制黑石砖墙">
+        <option value="minecraft:polished_blackstone_wall" label="磨制黑石墙">
+        <option value="minecraft:cobbled_deepslate_wall" label="深板岩圆石墙">
+        <option value="minecraft:deepslate_tile_wall" label="深板岩瓦墙">
+        <option value="minecraft:polished_deepslate_wall" label="磨制深板岩墙">
+        <option value="minecraft:deepslate_brick_wall" label="深板岩砖墙">
+        <option value="minecraft:mud_brick_wall" label="泥砖墙">
+        <option value="minecraft:oak_fence" label="橡木栅栏">
+        <option value="minecraft:spruce_fence" label="云杉木栅栏">
+        <option value="minecraft:birch_fence" label="白桦木栅栏">
+        <option value="minecraft:jungle_fence" label="丛林木栅栏">
+        <option value="minecraft:acacia_fence" label="金合欢木栅栏">
+        <option value="minecraft:dark_oak_fence" label="深色橡木栅栏">
+        <option value="minecraft:mangrove_fence" label="红树木栅栏">
+        <option value="minecraft:cherry_fence" label="樱花木栅栏">
+        <option value="minecraft:bamboo_fence" label="竹制围墙">
+        <option value="minecraft:nether_brick_fence" label="下界砖栅栏">
+        <option value="minecraft:crimson_fence" label="绯红木栅栏">
+        <option value="minecraft:warped_fence" label="诡异木栅栏">
+        <option value="minecraft:fence_gate" label="橡木栅栏门">
+        <option value="minecraft:spruce_fence_gate" label="云杉木栅栏门">
+        <option value="minecraft:birch_fence_gate" label="白桦木栅栏门">
+        <option value="minecraft:jungle_fence_gate" label="丛林木栅栏门">
+        <option value="minecraft:acacia_fence_gate" label="金合欢木栅栏门">
+        <option value="minecraft:dark_oak_fence_gate" label="深色橡木栅栏门">
+        <option value="minecraft:mangrove_fence_gate" label="红树木栅栏大门">
+        <option value="minecraft:cherry_fence_gate" label="樱花木栅栏门">
+        <option value="minecraft:bamboo_fence_gate" label="竹制围墙大门">
+        <option value="minecraft:crimson_fence_gate" label="绯红木栅栏门">
+        <option value="minecraft:warped_fence_gate" label="诡异木栅栏门">
+        <option value="minecraft:trapdoor" label="橡木活板门">
+        <option value="minecraft:spruce_trapdoor" label="云杉木活板门">
+        <option value="minecraft:birch_trapdoor" label="白桦木活板门">
+        <option value="minecraft:jungle_trapdoor" label="丛林木活板门">
+        <option value="minecraft:acacia_trapdoor" label="金合欢木活板门">
+        <option value="minecraft:dark_oak_trapdoor" label="深色橡木活板门">
+        <option value="minecraft:mangrove_trapdoor" label="红树木活板门">
+        <option value="minecraft:cherry_trapdoor" label="樱花木活板门">
+        <option value="minecraft:bamboo_trapdoor" label="竹制活板门">
+        <option value="minecraft:iron_trapdoor" label="铁活板门">
+        <option value="minecraft:crimson_trapdoor" label="绯红木活板门">
+        <option value="minecraft:warped_trapdoor" label="诡异木活板门">
+        <option value="minecraft:wooden_door" label="橡木门">
+        <option value="minecraft:cherry_door" label="樱花木门">
+        <option value="minecraft:mangrove_door" label="红树木门">
+        <option value="minecraft:dark_oak_door" label="深色橡木门">
+        <option value="minecraft:acacia_door" label="金合欢木门">
+        <option value="minecraft:warped_door" label="诡异门">
+        <option value="minecraft:crimson_door" label="绯红木门">
+        <option value="minecraft:jungle_door" label="丛林木门">
+        <option value="minecraft:birch_door" label="白桦木门">
+        <option value="minecraft:iron_door" label="铁门">
+        <option value="minecraft:bamboo_door" label="竹门">
+        <option value="minecraft:spruce_door" label="云杉木门">
+        <option value="minecraft:normal_stone_stairs" label="石质楼梯">
+        <option value="minecraft:stone_stairs" label="圆石楼梯">
+        <option value="minecraft:mossy_cobblestone_stairs" label="苔石楼梯">
+        <option value="minecraft:oak_stairs" label="橡木楼梯">
+        <option value="minecraft:mangrove_stairs" label="红树木楼梯">
+        <option value="minecraft:cherry_stairs" label="樱花木楼梯">
+        <option value="minecraft:bamboo_stairs" label="竹制楼梯">
+        <option value="minecraft:spruce_stairs" label="云杉木楼梯">
+        <option value="minecraft:birch_stairs" label="白桦木楼梯">
+        <option value="minecraft:bamboo_mosaic_stairs" label="竹制马赛克楼梯">
+        <option value="minecraft:stone_brick_stairs" label="石砖楼梯">
+        <option value="minecraft:jungle_stairs" label="丛林木楼梯">
+        <option value="minecraft:acacia_stairs" label="金合欢木楼梯">
+        <option value="minecraft:mossy_stone_brick_stairs" label="苔石砖楼梯">
+        <option value="minecraft:sandstone_stairs" label="砂岩楼梯">
+        <option value="minecraft:dark_oak_stairs" label="深色橡木楼梯">
+        <option value="minecraft:smooth_sandstone_stairs" label="平滑砂岩楼梯">
+        <option value="minecraft:red_sandstone_stairs" label="红砂岩楼梯">
+        <option value="minecraft:smooth_red_sandstone_stairs" label="平滑红砂岩楼梯">
+        <option value="minecraft:granite_stairs" label="花岗岩楼梯">
+        <option value="minecraft:polished_granite_stairs" label="磨制花岗岩楼梯">
+        <option value="minecraft:diorite_stairs" label="闪长岩楼梯">
+        <option value="minecraft:polished_diorite_stairs" label="磨制闪长岩楼梯">
+        <option value="minecraft:andesite_stairs" label="安山岩楼梯">
+        <option value="minecraft:polished_andesite_stairs" label="磨制安山岩楼梯">
+        <option value="minecraft:brick_stairs" label="砖楼梯">
+        <option value="minecraft:nether_brick_stairs" label="下界砖楼梯">
+        <option value="minecraft:red_nether_brick_stairs" label="红色下界砖楼梯">
+        <option value="minecraft:end_brick_stairs" label="末地石砖楼梯">
+        <option value="minecraft:quartz_stairs" label="石英楼梯">
+        <option value="minecraft:smooth_quartz_stairs" label="平滑石英楼梯">
+        <option value="minecraft:purpur_stairs" label="紫珀楼梯">
+        <option value="minecraft:prismarine_stairs" label="海晶石楼梯">
+        <option value="minecraft:dark_prismarine_stairs" label="暗海晶石楼梯">
+        <option value="minecraft:prismarine_bricks_stairs" label="海晶石砖楼梯">
+        <option value="minecraft:crimson_stairs" label="绯红木楼梯">
+        <option value="minecraft:warped_stairs" label="诡异楼梯">
+        <option value="minecraft:blackstone_stairs" label="黑石楼梯">
+        <option value="minecraft:polished_blackstone_stairs" label="磨制黑石楼梯">
+        <option value="minecraft:polished_blackstone_brick_stairs" label="磨制黑石砖楼梯">
+        <option value="minecraft:cut_copper_stairs" label="切制铜块楼梯">
+        <option value="minecraft:exposed_cut_copper_stairs" label="外露切制铜块楼梯">
+        <option value="minecraft:weathered_cut_copper_stairs" label="风化切制铜块楼梯">
+        <option value="minecraft:oxidized_cut_copper_stairs" label="氧化切制铜块楼梯">
+        <option value="minecraft:waxed_cut_copper_stairs" label="涂蜡切制铜块楼梯">
+        <option value="minecraft:waxed_exposed_cut_copper_stairs" label="斑驳的涂蜡切制铜块楼梯">
+        <option value="minecraft:waxed_weathered_cut_copper_stairs" label="锈蚀的涂蜡切制铜块楼梯">
+        <option value="minecraft:waxed_oxidized_cut_copper_stairs" label="氧化的涂蜡切制铜块楼梯">
+        <option value="minecraft:cobbled_deepslate_stairs" label="深板岩圆石楼梯">
+        <option value="minecraft:deepslate_tile_stairs" label="深板岩瓦楼梯">
+        <option value="minecraft:polished_deepslate_stairs" label="磨制深板岩楼梯">
+        <option value="minecraft:deepslate_brick_stairs" label="深板岩砖楼梯">
+        <option value="minecraft:mud_brick_stairs" label="泥砖楼梯">
+        <option value="minecraft:iron_bars" label="铁栏杆">
+        <option value="minecraft:glass" label="玻璃">
+        <option value="minecraft:white_stained_glass" label="白色玻璃">
+        <option value="minecraft:light_gray_stained_glass" label="淡灰色玻璃">
+        <option value="minecraft:gray_stained_glass" label="灰色玻璃">
+        <option value="minecraft:black_stained_glass" label="黑色玻璃">
+        <option value="minecraft:cyan_stained_glass" label="青色玻璃">
+        <option value="minecraft:green_stained_glass" label="绿色玻璃">
+        <option value="minecraft:tinted_glass" label="遮光玻璃">
+        <option value="minecraft:pink_stained_glass" label="粉红色玻璃">
+        <option value="minecraft:lime_stained_glass" label="黄绿色玻璃">
+        <option value="minecraft:yellow_stained_glass" label="黄色玻璃">
+        <option value="minecraft:magenta_stained_glass" label="品红色玻璃">
+        <option value="minecraft:purple_stained_glass" label="紫色玻璃">
+        <option value="minecraft:orange_stained_glass" label="橙色玻璃">
+        <option value="minecraft:red_stained_glass" label="红色玻璃">
+        <option value="minecraft:blue_stained_glass" label="蓝色玻璃">
+        <option value="minecraft:light_blue_stained_glass" label="淡蓝色玻璃">
+        <option value="minecraft:brown_stained_glass" label="棕色玻璃">
+        <option value="minecraft:glass_pane" label="玻璃板">
+        <option value="minecraft:white_stained_glass_pane" label="白色玻璃板">
+        <option value="minecraft:light_gray_stained_glass_pane" label="淡灰色玻璃板">
+        <option value="minecraft:gray_stained_glass_pane" label="灰色玻璃板">
+        <option value="minecraft:green_stained_glass_pane" label="绿色玻璃板">
+        <option value="minecraft:lime_stained_glass_pane" label="黄绿色玻璃板">
+        <option value="minecraft:pink_stained_glass_pane" label="粉红色玻璃板">
+        <option value="minecraft:magenta_stained_glass_pane" label="品红色玻璃板">
+        <option value="minecraft:yellow_stained_glass_pane" label="黄色玻璃板">
+        <option value="minecraft:orange_stained_glass_pane" label="橙色玻璃板">
+        <option value="minecraft:purple_stained_glass_pane" label="紫色玻璃板">
+        <option value="minecraft:blue_stained_glass_pane" label="蓝色玻璃板">
+        <option value="minecraft:red_stained_glass_pane" label="红色玻璃板">
+        <option value="minecraft:brown_stained_glass_pane" label="棕色玻璃板">
+        <option value="minecraft:light_blue_stained_glass_pane" label="淡蓝色玻璃板">
+        <option value="minecraft:cyan_stained_glass_pane" label="青色玻璃板">
+        <option value="minecraft:black_stained_glass_pane" label="黑色玻璃板">
+        <option value="minecraft:ladder" label="梯子">
+        <option value="minecraft:scaffolding" label="脚手架">
+        <option value="minecraft:stone_block_slab" label="平滑石台阶">
+        <option value="minecraft:jungle_slab" label="丛林木台阶">
+        <option value="minecraft:birch_slab" label="白桦木台阶">
+        <option value="minecraft:spruce_slab" label="云杉木台阶">
+        <option value="minecraft:oak_slab" label="橡木台阶">
+        <option value="minecraft:stone_block_slab2" label="苔石台阶">
+        <option value="minecraft:stone_block_slab" label="圆石台阶">
+        <option value="minecraft:stone_block_slab4" label="石台阶">
+        <option value="minecraft:acacia_slab" label="金合欢木台阶">
+        <option value="minecraft:dark_oak_slab" label="深色橡木台阶">
+        <option value="minecraft:mangrove_slab" label="红树木台阶">
+        <option value="minecraft:cherry_slab" label="樱花木台阶">
+        <option value="minecraft:bamboo_slab" label="竹制台阶">
+        <option value="minecraft:bamboo_mosaic_slab" label="竹制马赛克台阶">
+        <option value="minecraft:stone_block_slab" label="石砖台阶">
+        <option value="minecraft:stone_block_slab4" label="苔石砖台阶">
+        <option value="minecraft:stone_block_slab3" label="花岗岩台阶">
+        <option value="minecraft:stone_block_slab" label="砂岩台阶">
+        <option value="minecraft:stone_block_slab3" label="磨制花岗岩台阶">
+        <option value="minecraft:stone_block_slab4" label="切制砂岩台阶">
+        <option value="minecraft:stone_block_slab3" label="闪长岩台阶">
+        <option value="minecraft:stone_block_slab2" label="平滑砂岩台阶">
+        <option value="minecraft:stone_block_slab3" label="磨制闪长岩台阶">
+        <option value="minecraft:stone_block_slab2" label="红砂岩台阶">
+        <option value="minecraft:stone_block_slab3" label="安山岩台阶">
+        <option value="minecraft:stone_block_slab4" label="切制红砂岩台阶">
+        <option value="minecraft:stone_block_slab3" label="磨制安山岩台阶">
+        <option value="minecraft:stone_block_slab3" label="平滑红砂岩台阶">
+        <option value="minecraft:stone_block_slab" label="砖台阶">
+        <option value="minecraft:stone_block_slab" label="下界砖台阶">
+        <option value="minecraft:stone_block_slab2" label="红色下界砖台阶">
+        <option value="minecraft:stone_block_slab3" label="末地石砖台阶">
+        <option value="minecraft:stone_block_slab" label="石英台阶">
+        <option value="minecraft:stone_block_slab4" label="平滑石英台阶">
+        <option value="minecraft:stone_block_slab2" label="紫珀台阶">
+        <option value="minecraft:stone_block_slab2" label="海晶石台阶">
+        <option value="minecraft:stone_block_slab2" label="暗海晶石台阶">
+        <option value="minecraft:stone_block_slab2" label="海晶石砖台阶">
+        <option value="minecraft:crimson_slab" label="绯红木台阶">
+        <option value="minecraft:warped_slab" label="诡异木台阶">
+        <option value="minecraft:blackstone_slab" label="黑石台阶">
+        <option value="minecraft:polished_blackstone_slab" label="磨制黑石台阶">
+        <option value="minecraft:polished_blackstone_brick_slab" label="磨制黑石砖台阶">
+        <option value="minecraft:cut_copper_slab" label="切制铜块台阶">
+        <option value="minecraft:exposed_cut_copper_slab" label="外露切制铜块台阶">
+        <option value="minecraft:weathered_cut_copper_slab" label="风化切制铜块台阶">
+        <option value="minecraft:oxidized_cut_copper_slab" label="氧化切制铜块台阶">
+        <option value="minecraft:waxed_cut_copper_slab" label="涂蜡切制铜块台阶">
+        <option value="minecraft:waxed_exposed_cut_copper_slab" label="斑驳的涂蜡切制铜块台阶">
+        <option value="minecraft:waxed_weathered_cut_copper_slab" label="锈蚀的涂蜡切制铜块台阶">
+        <option value="minecraft:waxed_oxidized_cut_copper_slab" label="氧化的涂蜡切制铜块台阶">
+        <option value="minecraft:cobbled_deepslate_slab" label="深板岩圆石台阶">
+        <option value="minecraft:polished_deepslate_slab" label="磨制深板岩台阶">
+        <option value="minecraft:deepslate_tile_slab" label="深板岩瓦台阶">
+        <option value="minecraft:deepslate_brick_slab" label="深板岩砖台阶">
+        <option value="minecraft:mud_brick_slab" label="泥砖台阶">
+        <option value="minecraft:brick_block" label="砖块">
+        <option value="minecraft:chiseled_nether_bricks" label="錾制下界砖">
+        <option value="minecraft:cracked_nether_bricks" label="裂纹下界砖">
+        <option value="minecraft:quartz_bricks" label="石英砖">
+        <option value="minecraft:stonebrick" label="石砖">
+        <option value="minecraft:stonebrick" label="苔石砖">
+        <option value="minecraft:stonebrick" label="裂纹石砖">
+        <option value="minecraft:stonebrick" label="錾制石砖">
+        <option value="minecraft:end_bricks" label="末地石砖">
+        <option value="minecraft:prismarine" label="海晶石砖">
+        <option value="minecraft:polished_blackstone_bricks" label="磨制黑石砖">
+        <option value="minecraft:cracked_polished_blackstone_bricks" label="裂纹磨制黑石砖">
+        <option value="minecraft:gilded_blackstone" label="镶金黑石">
+        <option value="minecraft:chiseled_polished_blackstone" label="錾制磨制黑石">
+        <option value="minecraft:deepslate_tiles" label="深板岩瓦">
+        <option value="minecraft:cracked_deepslate_tiles" label="裂纹深板岩瓦">
+        <option value="minecraft:deepslate_bricks" label="深板岩砖">
+        <option value="minecraft:cracked_deepslate_bricks" label="裂纹深板岩砖">
+        <option value="minecraft:chiseled_deepslate" label="錾制深板岩">
+        <option value="minecraft:cobblestone" label="圆石">
+        <option value="minecraft:mossy_cobblestone" label="苔石">
+        <option value="minecraft:cobbled_deepslate" label="深板岩圆石">
+        <option value="minecraft:smooth_stone" label="平滑石">
+        <option value="minecraft:sandstone" label="砂岩">
+        <option value="minecraft:sandstone" label="錾制砂岩">
+        <option value="minecraft:sandstone" label="切制砂岩">
+        <option value="minecraft:sandstone" label="平滑砂岩">
+        <option value="minecraft:red_sandstone" label="红砂岩">
+        <option value="minecraft:red_sandstone" label="錾制红砂岩">
+        <option value="minecraft:red_sandstone" label="切制红砂岩">
+        <option value="minecraft:red_sandstone" label="平滑红砂岩">
+        <option value="minecraft:coal_block" label="煤炭块">
+        <option value="minecraft:dried_kelp_block" label="干海带块">
+        <option value="minecraft:gold_block" label="金块">
+        <option value="minecraft:iron_block" label="铁块">
+        <option value="minecraft:copper_block" label="铜方块">
+        <option value="minecraft:waxed_oxidized_copper" label="氧化的涂蜡铜块">
+        <option value="minecraft:exposed_copper" label="斑驳的铜块">
+        <option value="minecraft:cut_copper" label="切制铜块">
+        <option value="minecraft:weathered_copper" label="锈蚀的铜块">
+        <option value="minecraft:exposed_cut_copper" label="外露切制铜块">
+        <option value="minecraft:oxidized_copper" label="氧化的铜块">
+        <option value="minecraft:weathered_cut_copper" label="风化切制铜块">
+        <option value="minecraft:waxed_copper" label="涂蜡铜方块">
+        <option value="minecraft:oxidized_cut_copper" label="氧化切制铜块">
+        <option value="minecraft:waxed_cut_copper" label="涂蜡切制铜块">
+        <option value="minecraft:waxed_exposed_copper" label="斑驳的涂蜡铜块">
+        <option value="minecraft:waxed_weathered_copper" label="锈蚀的涂蜡铜块">
+        <option value="minecraft:waxed_exposed_cut_copper" label="斑驳的涂蜡切制铜块">
+        <option value="minecraft:waxed_oxidized_cut_copper" label="氧化的涂蜡切制铜块">
+        <option value="minecraft:waxed_weathered_cut_copper" label="锈蚀的涂蜡切制铜块">
+        <option value="minecraft:emerald_block" label="绿宝石块">
+        <option value="minecraft:diamond_block" label="钻石块">
+        <option value="minecraft:lapis_block" label="青金石块">
+        <option value="minecraft:raw_iron_block" label="粗铁块">
+        <option value="minecraft:raw_copper_block" label="粗铜块">
+        <option value="minecraft:raw_gold_block" label="粗金块">
+        <option value="minecraft:quartz_block" label="石英块">
+        <option value="minecraft:quartz_block" label="石英柱">
+        <option value="minecraft:quartz_block" label="錾制石英块">
+        <option value="minecraft:quartz_block" label="平滑石英块">
+        <option value="minecraft:prismarine" label="海晶石">
+        <option value="minecraft:prismarine" label="暗海晶石">
+        <option value="minecraft:slime" label="黏液块">
+        <option value="minecraft:honey_block" label="蜂蜜方块">
+        <option value="minecraft:honeycomb_block" label="蜜脾块">
+        <option value="minecraft:hay_block" label="干草块">
+        <option value="minecraft:bone_block" label="骨块">
+        <option value="minecraft:nether_brick" label="下界砖块">
+        <option value="minecraft:red_nether_brick" label="红色下界砖">
+        <option value="minecraft:netherite_block" label="下界合金块">
+        <option value="minecraft:lodestone" label="磁石">
+        <option value="minecraft:white_wool" label="白色羊毛">
+        <option value="minecraft:light_gray_wool" label="淡灰色羊毛">
+        <option value="minecraft:gray_wool" label="灰色羊毛">
+        <option value="minecraft:black_wool" label="黑色羊毛">
+        <option value="minecraft:brown_wool" label="棕色羊毛">
+        <option value="minecraft:red_wool" label="红色羊毛">
+        <option value="minecraft:blue_wool" label="蓝色羊毛">
+        <option value="minecraft:light_blue_wool" label="淡蓝色羊毛">
+        <option value="minecraft:cyan_wool" label="青色羊毛">
+        <option value="minecraft:green_wool" label="绿色羊毛">
+        <option value="minecraft:lime_wool" label="黄绿色羊毛">
+        <option value="minecraft:pink_wool" label="粉红色羊毛">
+        <option value="minecraft:magenta_wool" label="品红色羊毛">
+        <option value="minecraft:yellow_wool" label="黄色羊毛">
+        <option value="minecraft:orange_wool" label="橙色羊毛">
+        <option value="minecraft:purple_wool" label="紫色羊毛">
+        <option value="minecraft:white_carpet" label="白色地毯">
+        <option value="minecraft:yellow_carpet" label="黄色地毯">
+        <option value="minecraft:light_gray_carpet" label="淡灰色地毯">
+        <option value="minecraft:lime_carpet" label="黄绿色地毯">
+        <option value="minecraft:gray_carpet" label="灰色地毯">
+        <option value="minecraft:green_carpet" label="绿色地毯">
+        <option value="minecraft:black_carpet" label="黑色地毯">
+        <option value="minecraft:cyan_carpet" label="青色地毯">
+        <option value="minecraft:brown_carpet" label="棕色地毯">
+        <option value="minecraft:light_blue_carpet" label="淡蓝色地毯">
+        <option value="minecraft:orange_carpet" label="橙色地毯">
+        <option value="minecraft:purple_carpet" label="紫色地毯">
+        <option value="minecraft:red_carpet" label="红色地毯">
+        <option value="minecraft:blue_carpet" label="蓝色地毯">
+        <option value="minecraft:magenta_carpet" label="品红色地毯">
+        <option value="minecraft:pink_carpet" label="粉红色地毯">
+        <option value="minecraft:white_concrete_powder" label="白色混凝土粉末">
+        <option value="minecraft:light_gray_concrete_powder" label="淡灰色混凝土粉末">
+        <option value="minecraft:gray_concrete_powder" label="灰色混凝土粉末">
+        <option value="minecraft:black_concrete_powder" label="黑色混凝土粉末">
+        <option value="minecraft:cyan_concrete_powder" label="青色混凝土粉末">
+        <option value="minecraft:green_concrete_powder" label="绿色混凝土粉末">
+        <option value="minecraft:lime_concrete_powder" label="黄绿色混凝土粉末">
+        <option value="minecraft:pink_concrete_powder" label="粉红色混凝土粉末">
+        <option value="minecraft:yellow_concrete_powder" label="黄色混凝土粉末">
+        <option value="minecraft:magenta_concrete_powder" label="品红色混凝土粉末">
+        <option value="minecraft:orange_concrete_powder" label="橙色混凝土粉末">
+        <option value="minecraft:purple_concrete_powder" label="紫色混凝土粉末">
+        <option value="minecraft:red_concrete_powder" label="红色混凝土粉末">
+        <option value="minecraft:blue_concrete_powder" label="蓝色混凝土粉末">
+        <option value="minecraft:brown_concrete_powder" label="棕色混凝土粉末">
+        <option value="minecraft:light_blue_concrete_powder" label="淡蓝色混凝土粉末">
+        <option value="minecraft:white_concrete" label="白色混凝土">
+        <option value="minecraft:yellow_concrete" label="黄色混凝土">
+        <option value="minecraft:orange_concrete" label="橙色混凝土">
+        <option value="minecraft:red_concrete" label="红色混凝土">
+        <option value="minecraft:brown_concrete" label="棕色混凝土">
+        <option value="minecraft:black_concrete" label="黑色混凝土">
+        <option value="minecraft:gray_concrete" label="灰色混凝土">
+        <option value="minecraft:light_gray_concrete" label="淡灰色混凝土">
+        <option value="minecraft:lime_concrete" label="黄绿色混凝土">
+        <option value="minecraft:green_concrete" label="绿色混凝土">
+        <option value="minecraft:cyan_concrete" label="青色混凝土">
+        <option value="minecraft:light_blue_concrete" label="淡蓝色混凝土">
+        <option value="minecraft:blue_concrete" label="蓝色混凝土">
+        <option value="minecraft:purple_concrete" label="紫色混凝土">
+        <option value="minecraft:magenta_concrete" label="品红色混凝土">
+        <option value="minecraft:pink_concrete" label="粉红色混凝土">
+        <option value="minecraft:clay" label="黏土块">
+        <option value="minecraft:hardened_clay" label="陶瓦">
+        <option value="minecraft:orange_terracotta" label="橙色陶瓦">
+        <option value="minecraft:purple_terracotta" label="紫色陶瓦">
+        <option value="minecraft:blue_terracotta" label="蓝色陶瓦">
+        <option value="minecraft:red_terracotta" label="红色陶瓦">
+        <option value="minecraft:white_terracotta" label="白色陶瓦">
+        <option value="minecraft:yellow_terracotta" label="黄色陶瓦">
+        <option value="minecraft:magenta_terracotta" label="品红色陶瓦">
+        <option value="minecraft:pink_terracotta" label="粉红色陶瓦">
+        <option value="minecraft:lime_terracotta" label="黄绿色陶瓦">
+        <option value="minecraft:light_gray_terracotta" label="淡灰色陶瓦">
+        <option value="minecraft:gray_terracotta" label="灰色陶瓦">
+        <option value="minecraft:green_terracotta" label="绿色陶瓦">
+        <option value="minecraft:cyan_terracotta" label="青色陶瓦">
+        <option value="minecraft:black_terracotta" label="黑色陶瓦">
+        <option value="minecraft:brown_terracotta" label="棕色陶瓦">
+        <option value="minecraft:light_blue_terracotta" label="淡蓝色陶瓦">
+        <option value="minecraft:white_glazed_terracotta" label="白色带釉陶瓦">
+        <option value="minecraft:yellow_glazed_terracotta" label="黄色带釉陶瓦">
+        <option value="minecraft:silver_glazed_terracotta" label="淡灰色带釉陶瓦">
+        <option value="minecraft:lime_glazed_terracotta" label="黄绿色带釉陶瓦">
+        <option value="minecraft:pink_glazed_terracotta" label="粉红色带釉陶瓦">
+        <option value="minecraft:magenta_glazed_terracotta" label="品红色带釉陶瓦">
+        <option value="minecraft:orange_glazed_terracotta" label="橙色带釉陶瓦">
+        <option value="minecraft:purple_glazed_terracotta" label="紫色带釉陶瓦">
+        <option value="minecraft:red_glazed_terracotta" label="红色带釉陶瓦">
+        <option value="minecraft:blue_glazed_terracotta" label="蓝色带釉陶瓦">
+        <option value="minecraft:brown_glazed_terracotta" label="棕色带釉陶瓦">
+        <option value="minecraft:light_blue_glazed_terracotta" label="淡蓝色带釉陶瓦">
+        <option value="minecraft:black_glazed_terracotta" label="黑色带釉陶瓦">
+        <option value="minecraft:cyan_glazed_terracotta" label="青色带釉陶瓦">
+        <option value="minecraft:gray_glazed_terracotta" label="灰色带釉陶瓦">
+        <option value="minecraft:green_glazed_terracotta" label="绿色带釉陶瓦">
+        <option value="minecraft:purpur_block" label="紫珀方块">
+        <option value="minecraft:purpur_block" label="紫珀柱子">
+        <option value="minecraft:packed_mud" label="填充泥浆">
+        <option value="minecraft:mud_bricks" label="泥砖">
+        <option value="minecraft:leather_helmet" label="皮革帽子">
+        <option value="minecraft:leather_chestplate" label="皮革胸甲">
+        <option value="minecraft:leather_leggings" label="皮革裤子">
+        <option value="minecraft:leather_boots" label="皮革靴子">
+        <option value="minecraft:wooden_sword" label="木剑">
+        <option value="minecraft:wooden_axe" label="木斧">
+        <option value="minecraft:chainmail_chestplate" label="锁链胸甲">
+        <option value="minecraft:chainmail_helmet" label="锁链头盔">
+        <option value="minecraft:chainmail_leggings" label="锁链护腿">
+        <option value="minecraft:chainmail_boots" label="锁链靴子">
+        <option value="minecraft:stone_sword" label="石剑">
+        <option value="minecraft:stone_axe" label="石斧">
+        <option value="minecraft:iron_axe" label="铁斧">
+        <option value="minecraft:iron_sword" label="铁剑">
+        <option value="minecraft:iron_boots" label="铁靴子">
+        <option value="minecraft:iron_leggings" label="铁护腿">
+        <option value="minecraft:iron_chestplate" label="铁胸甲">
+        <option value="minecraft:iron_helmet" label="铁头盔">
+        <option value="minecraft:golden_helmet" label="金头盔">
+        <option value="minecraft:golden_chestplate" label="金胸甲">
+        <option value="minecraft:golden_leggings" label="金护腿">
+        <option value="minecraft:golden_boots" label="金靴子">
+        <option value="minecraft:golden_sword" label="金剑">
+        <option value="minecraft:golden_axe" label="金斧">
+        <option value="minecraft:diamond_axe" label="钻石斧">
+        <option value="minecraft:diamond_sword" label="钻石剑">
+        <option value="minecraft:diamond_boots" label="钻石靴子">
+        <option value="minecraft:diamond_leggings" label="钻石护腿">
+        <option value="minecraft:diamond_chestplate" label="钻石胸甲">
+        <option value="minecraft:diamond_helmet" label="钻石头盔">
+        <option value="minecraft:netherite_helmet" label="下界合金头盔">
+        <option value="minecraft:netherite_chestplate" label="下界合金胸甲">
+        <option value="minecraft:netherite_boots" label="下界合金靴子">
+        <option value="minecraft:netherite_leggings" label="下界合金护腿">
+        <option value="minecraft:netherite_sword" label="下界合金剑">
+        <option value="minecraft:netherite_axe" label="下界合金斧头">
+        <option value="minecraft:netherite_pickaxe" label="下界合金镐">
+        <option value="minecraft:netherite_shovel" label="下界合金锹">
+        <option value="minecraft:netherite_hoe" label="下界合金锄头">
+        <option value="minecraft:diamond_pickaxe" label="钻石镐">
+        <option value="minecraft:diamond_shovel" label="钻石锹">
+        <option value="minecraft:diamond_hoe" label="钻石锄">
+        <option value="minecraft:golden_pickaxe" label="金镐">
+        <option value="minecraft:golden_shovel" label="金锹">
+        <option value="minecraft:golden_hoe" label="金锄">
+        <option value="minecraft:iron_pickaxe" label="铁镐">
+        <option value="minecraft:iron_shovel" label="铁锹">
+        <option value="minecraft:iron_hoe" label="铁锄">
+        <option value="minecraft:stone_pickaxe" label="石镐">
+        <option value="minecraft:stone_shovel" label="石锹">
+        <option value="minecraft:stone_hoe" label="石锄">
+        <option value="minecraft:wooden_pickaxe" label="木镐">
+        <option value="minecraft:wooden_shovel" label="木锹">
+        <option value="minecraft:wooden_hoe" label="木锄">
+        <option value="minecraft:bow" label="弓">
+        <option value="minecraft:crossbow" label="弩">
+        <option value="minecraft:arrow" label="箭">
+        <option value="minecraft:arrow" label="夜视箭">
+        <option value="minecraft:arrow" label="抗火箭">
+        <option value="minecraft:arrow" label="跳跃箭">
+        <option value="minecraft:arrow" label="跳跃箭">
+        <option value="minecraft:arrow" label="跳跃箭">
+        <option value="minecraft:arrow" label="隐身箭">
+        <option value="minecraft:arrow" label="隐身箭">
+        <option value="minecraft:arrow" label="夜视箭">
+        <option value="minecraft:arrow" label="抗火箭">
+        <option value="minecraft:arrow" label="迅捷之箭">
+        <option value="minecraft:arrow" label="迅捷之箭">
+        <option value="minecraft:arrow" label="迅捷之箭">
+        <option value="minecraft:arrow" label="缓慢之箭">
+        <option value="minecraft:arrow" label="缓慢之箭">
+        <option value="minecraft:arrow" label="水肺之箭">
+        <option value="minecraft:arrow" label="水肺之箭">
+        <option value="minecraft:arrow" label="治疗之箭">
+        <option value="minecraft:arrow" label="治疗之箭">
+        <option value="minecraft:arrow" label="伤害之箭">
+        <option value="minecraft:arrow" label="伤害之箭">
+        <option value="minecraft:arrow" label="剧毒箭">
+        <option value="minecraft:arrow" label="剧毒箭">
+        <option value="minecraft:arrow" label="剧毒箭">
+        <option value="minecraft:arrow" label="再生之箭">
+        <option value="minecraft:arrow" label="再生之箭">
+        <option value="minecraft:arrow" label="再生之箭">
+        <option value="minecraft:arrow" label="力量之箭">
+        <option value="minecraft:arrow" label="力量之箭">
+        <option value="minecraft:arrow" label="力量之箭">
+        <option value="minecraft:arrow" label="虚弱之箭">
+        <option value="minecraft:arrow" label="虚弱之箭">
+        <option value="minecraft:arrow" label="衰变之箭">
+        <option value="minecraft:arrow" label="神龟之箭">
+        <option value="minecraft:arrow" label="神龟之箭">
+        <option value="minecraft:arrow" label="神龟之箭">
+        <option value="minecraft:arrow" label="缓降之箭">
+        <option value="minecraft:arrow" label="缓降之箭">
+        <option value="minecraft:arrow" label="缓慢之箭">
+        <option value="minecraft:shield" label="盾牌">
+        <option value="minecraft:cooked_chicken" label="熟鸡肉">
+        <option value="minecraft:cooked_porkchop" label="熟猪排">
+        <option value="minecraft:cooked_beef" label="牛排">
+        <option value="minecraft:cooked_mutton" label="熟羊肉">
+        <option value="minecraft:cooked_rabbit" label="熟兔肉">
+        <option value="minecraft:cooked_cod" label="熟鳕鱼">
+        <option value="minecraft:cooked_salmon" label="熟鲑鱼">
+        <option value="minecraft:bread" label="面包">
+        <option value="minecraft:mushroom_stew" label="蘑菇煲">
+        <option value="minecraft:dried_kelp" label="干海带">
+        <option value="minecraft:cake" label="蛋糕">
+        <option value="minecraft:pumpkin_pie" label="南瓜派">
+        <option value="minecraft:cookie" label="曲奇">
+        <option value="minecraft:baked_potato" label="烤马铃薯">
+        <option value="minecraft:rabbit_stew" label="兔肉煲">
+        <option value="minecraft:beetroot_soup" label="甜菜汤">
+        <option value="minecraft:fishing_rod" label="钓鱼竿">
+        <option value="minecraft:carrot_on_a_stick" label="胡萝卜钓竿">
+        <option value="minecraft:warped_fungus_on_a_stick" label="诡异真菌钓竿">
+        <option value="minecraft:snowball" label="雪球">
+        <option value="minecraft:shears" label="剪刀">
+        <option value="minecraft:flint_and_steel" label="打火石">
+        <option value="minecraft:lead" label="拴绳">
+        <option value="minecraft:saddle" label="鞍">
+        <option value="minecraft:empty_map" label="空定位器地图">
+        <option value="minecraft:empty_map" label="空地图">
+        <option value="minecraft:recovery_compass" label="追溯指针">
+        <option value="minecraft:compass" label="指南针">
+        <option value="minecraft:clock" label="钟">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:goat_horn" label="山羊角">
+        <option value="minecraft:leather_horse_armor" label="皮革马铠">
+        <option value="minecraft:iron_horse_armor" label="铁马铠">
+        <option value="minecraft:golden_horse_armor" label="黄金马铠">
+        <option value="minecraft:diamond_horse_armor" label="钻石马铠">
+        <option value="minecraft:wolf_armor" label="狼铠">
+        <option value="minecraft:trident" label="三叉戟">
+        <option value="minecraft:turtle_helmet" label="海龟壳">
+        <option value="minecraft:elytra" label="鞘翅">
+        <option value="minecraft:totem_of_undying" label="不死图腾">
+        <option value="minecraft:glass_bottle" label="玻璃瓶">
+        <option value="minecraft:experience_bottle" label="附魔之瓶">
+        <option value="minecraft:brush" label="刷子">
+        <option value="minecraft:spyglass" label="望远镜">
+        <option value="minecraft:potion" label="水瓶">
+        <option value="minecraft:potion" label="平凡药水">
+        <option value="minecraft:potion" label="长久平凡药水">
+        <option value="minecraft:potion" label="浓稠药水">
+        <option value="minecraft:potion" label="跳跃药水">
+        <option value="minecraft:potion" label="跳跃药水">
+        <option value="minecraft:potion" label="隐身药水">
+        <option value="minecraft:potion" label="隐身药水">
+        <option value="minecraft:potion" label="夜视药水">
+        <option value="minecraft:potion" label="夜视药水">
+        <option value="minecraft:potion" label="粗制药水">
+        <option value="minecraft:potion" label="跳跃药水">
+        <option value="minecraft:potion" label="抗火药水">
+        <option value="minecraft:potion" label="抗火药水">
+        <option value="minecraft:potion" label="迅捷药水">
+        <option value="minecraft:potion" label="迅捷药水">
+        <option value="minecraft:potion" label="迅捷药水">
+        <option value="minecraft:potion" label="迟缓药水">
+        <option value="minecraft:potion" label="伤害药水">
+        <option value="minecraft:potion" label="伤害药水">
+        <option value="minecraft:potion" label="治疗药水">
+        <option value="minecraft:potion" label="治疗药水">
+        <option value="minecraft:potion" label="水肺药水">
+        <option value="minecraft:potion" label="水肺药水">
+        <option value="minecraft:potion" label="迟缓药水">
+        <option value="minecraft:potion" label="剧毒药水">
+        <option value="minecraft:potion" label="剧毒药水">
+        <option value="minecraft:potion" label="剧毒药水">
+        <option value="minecraft:potion" label="再生药水">
+        <option value="minecraft:potion" label="再生药水">
+        <option value="minecraft:potion" label="再生药水">
+        <option value="minecraft:potion" label="力量药水">
+        <option value="minecraft:potion" label="力量药水">
+        <option value="minecraft:potion" label="力量药水">
+        <option value="minecraft:potion" label="虚弱药水">
+        <option value="minecraft:potion" label="虚弱药水">
+        <option value="minecraft:potion" label="衰变药水">
+        <option value="minecraft:potion" label="神龟药水">
+        <option value="minecraft:potion" label="神龟药水">
+        <option value="minecraft:potion" label="神龟药水">
+        <option value="minecraft:potion" label="缓降药水">
+        <option value="minecraft:potion" label="缓降药水">
+        <option value="minecraft:potion" label="迟缓药水">
+        <option value="minecraft:splash_potion" label="喷溅水瓶">
+        <option value="minecraft:splash_potion" label="喷溅型平凡药水">
+        <option value="minecraft:splash_potion" label="喷溅型隐身药水">
+        <option value="minecraft:splash_potion" label="喷溅型隐身药水">
+        <option value="minecraft:splash_potion" label="喷溅型夜视药水">
+        <option value="minecraft:splash_potion" label="喷溅型夜视药水">
+        <option value="minecraft:splash_potion" label="喷溅型粗制药水">
+        <option value="minecraft:splash_potion" label="喷溅型浓稠药水">
+        <option value="minecraft:splash_potion" label="喷溅型长久平凡药水">
+        <option value="minecraft:splash_potion" label="喷溅型跳跃药水">
+        <option value="minecraft:splash_potion" label="喷溅型跳跃药水">
+        <option value="minecraft:splash_potion" label="喷溅型跳跃药水">
+        <option value="minecraft:splash_potion" label="喷溅型抗火药水">
+        <option value="minecraft:splash_potion" label="喷溅型抗火药水">
+        <option value="minecraft:splash_potion" label="喷溅型迅捷药水">
+        <option value="minecraft:splash_potion" label="喷溅型迅捷药水">
+        <option value="minecraft:splash_potion" label="喷溅型迅捷药水">
+        <option value="minecraft:splash_potion" label="喷溅型迟缓药水">
+        <option value="minecraft:splash_potion" label="喷溅型迟缓药水">
+        <option value="minecraft:splash_potion" label="喷溅型水肺药水">
+        <option value="minecraft:splash_potion" label="喷溅型水肺药水">
+        <option value="minecraft:splash_potion" label="喷溅型治疗药水">
+        <option value="minecraft:splash_potion" label="喷溅型治疗药水">
+        <option value="minecraft:splash_potion" label="喷溅型伤害药水">
+        <option value="minecraft:splash_potion" label="喷溅型伤害药水">
+        <option value="minecraft:splash_potion" label="喷溅型剧毒药水">
+        <option value="minecraft:splash_potion" label="喷溅型剧毒药水">
+        <option value="minecraft:splash_potion" label="喷溅型剧毒药水">
+        <option value="minecraft:splash_potion" label="喷溅型再生药水">
+        <option value="minecraft:splash_potion" label="喷溅型再生药水">
+        <option value="minecraft:splash_potion" label="喷溅型再生药水">
+        <option value="minecraft:splash_potion" label="喷溅型力量药水">
+        <option value="minecraft:splash_potion" label="喷溅型力量药水">
+        <option value="minecraft:splash_potion" label="喷溅型力量药水">
+        <option value="minecraft:splash_potion" label="喷溅型虚弱药水">
+        <option value="minecraft:splash_potion" label="喷溅型虚弱药水">
+        <option value="minecraft:splash_potion" label="喷溅型衰变药水">
+        <option value="minecraft:splash_potion" label="喷溅型神龟药水">
+        <option value="minecraft:splash_potion" label="喷溅型神龟药水">
+        <option value="minecraft:splash_potion" label="喷溅型神龟药水">
+        <option value="minecraft:splash_potion" label="喷溅型缓降药水">
+        <option value="minecraft:splash_potion" label="喷溅型缓降药水">
+        <option value="minecraft:splash_potion" label="喷溅型迟缓药水">
+        <option value="minecraft:lingering_potion" label="滯留水瓶">
+        <option value="minecraft:lingering_potion" label="滞留型隐身药水">
+        <option value="minecraft:lingering_potion" label="滞留型夜视药水">
+        <option value="minecraft:lingering_potion" label="滞留型夜视药水">
+        <option value="minecraft:lingering_potion" label="滞留型粗制药水">
+        <option value="minecraft:lingering_potion" label="滞留型浓稠药水">
+        <option value="minecraft:lingering_potion" label="滞留型长久平凡药水">
+        <option value="minecraft:lingering_potion" label="滞留型平凡药水">
+        <option value="minecraft:lingering_potion" label="滞留型隐身药水">
+        <option value="minecraft:lingering_potion" label="滞留型跳跃药水">
+        <option value="minecraft:lingering_potion" label="滞留型跳跃药水">
+        <option value="minecraft:lingering_potion" label="滞留型跳跃药水">
+        <option value="minecraft:lingering_potion" label="滞留型抗火药水">
+        <option value="minecraft:lingering_potion" label="滞留型抗火药水">
+        <option value="minecraft:lingering_potion" label="滞留型迅捷药水">
+        <option value="minecraft:lingering_potion" label="滞留型治疗药水">
+        <option value="minecraft:lingering_potion" label="滞留型水肺药水">
+        <option value="minecraft:lingering_potion" label="滞留型水肺药水">
+        <option value="minecraft:lingering_potion" label="滞留型迟缓药水">
+        <option value="minecraft:lingering_potion" label="滞留型迟缓药水">
+        <option value="minecraft:lingering_potion" label="滞留型迅捷药水">
+        <option value="minecraft:lingering_potion" label="滞留型迅捷药水">
+        <option value="minecraft:lingering_potion" label="滞留型治疗药水">
+        <option value="minecraft:lingering_potion" label="滞留型再生药水">
+        <option value="minecraft:lingering_potion" label="滞留型伤害药水">
+        <option value="minecraft:lingering_potion" label="滞留型再生药水">
+        <option value="minecraft:lingering_potion" label="滞留型伤害药水">
+        <option value="minecraft:lingering_potion" label="滞留型力量药水">
+        <option value="minecraft:lingering_potion" label="滞留型剧毒药水">
+        <option value="minecraft:lingering_potion" label="滞留型力量药水">
+        <option value="minecraft:lingering_potion" label="滞留型剧毒药水">
+        <option value="minecraft:lingering_potion" label="滞留型力量药水">
+        <option value="minecraft:lingering_potion" label="滞留型剧毒药水">
+        <option value="minecraft:lingering_potion" label="滞留型虚弱药水">
+        <option value="minecraft:lingering_potion" label="滞留型再生药水">
+        <option value="minecraft:lingering_potion" label="滞留型虚弱药水">
+        <option value="minecraft:lingering_potion" label="滞留型迟缓药水">
+        <option value="minecraft:lingering_potion" label="滞留型缓降药水">
+        <option value="minecraft:lingering_potion" label="滞留型缓降药水">
+        <option value="minecraft:lingering_potion" label="滞留型神龟药水">
+        <option value="minecraft:lingering_potion" label="滞留型神龟药水">
+        <option value="minecraft:lingering_potion" label="滞留型神龟药水">
+        <option value="minecraft:lingering_potion" label="滞留型衰变药水">
+        <option value="minecraft:stick" label="木棍">
+        <option value="minecraft:bed" label="白床">
+        <option value="minecraft:bed" label="淡灰床">
+        <option value="minecraft:bed" label="灰床">
+        <option value="minecraft:bed" label="黑床">
+        <option value="minecraft:bed" label="棕床">
+        <option value="minecraft:bed" label="淡蓝床">
+        <option value="minecraft:bed" label="青床">
+        <option value="minecraft:bed" label="绿床">
+        <option value="minecraft:bed" label="黄绿床">
+        <option value="minecraft:bed" label="粉床">
+        <option value="minecraft:bed" label="黄床">
+        <option value="minecraft:bed" label="品红床">
+        <option value="minecraft:bed" label="橙床">
+        <option value="minecraft:bed" label="紫床">
+        <option value="minecraft:bed" label="红床">
+        <option value="minecraft:bed" label="蓝床">
+        <option value="minecraft:torch" label="火把">
+        <option value="minecraft:soul_torch" label="灵魂火把">
+        <option value="minecraft:sea_pickle" label="海泡菜">
+        <option value="minecraft:lantern" label="灯">
+        <option value="minecraft:soul_lantern" label="灵魂灯">
+        <option value="minecraft:candle" label="蜡烛">
+        <option value="minecraft:white_candle" label="白色蜡烛">
+        <option value="minecraft:orange_candle" label="橙色蜡烛">
+        <option value="minecraft:magenta_candle" label="品红色蜡烛">
+        <option value="minecraft:cyan_candle" label="青色蜡烛">
+        <option value="minecraft:light_gray_candle" label="淡灰色蜡烛">
+        <option value="minecraft:gray_candle" label="灰色蜡烛">
+        <option value="minecraft:red_candle" label="红色蜡烛">
+        <option value="minecraft:black_candle" label="黑色蜡烛">
+        <option value="minecraft:pink_candle" label="粉红色蜡烛">
+        <option value="minecraft:green_candle" label="绿色蜡烛">
+        <option value="minecraft:lime_candle" label="黄绿色蜡烛">
+        <option value="minecraft:brown_candle" label="棕色蜡烛">
+        <option value="minecraft:yellow_candle" label="黄色蜡烛">
+        <option value="minecraft:blue_candle" label="蓝色蜡烛">
+        <option value="minecraft:light_blue_candle" label="淡蓝色蜡烛">
+        <option value="minecraft:purple_candle" label="紫色蜡烛">
+        <option value="minecraft:crafting_table" label="工作台">
+        <option value="minecraft:cartography_table" label="制图台">
+        <option value="minecraft:fletching_table" label="制箭台">
+        <option value="minecraft:smithing_table" label="锻造台">
+        <option value="minecraft:beehive" label="蜂箱">
+        <option value="minecraft:suspicious_sand" label="可疑的沙子">
+        <option value="minecraft:suspicious_gravel" label="可疑砂砾">
+        <option value="minecraft:campfire" label="营火">
+        <option value="minecraft:soul_campfire" label="灵魂营火">
+        <option value="minecraft:furnace" label="熔炉">
+        <option value="minecraft:blast_furnace" label="高炉">
+        <option value="minecraft:smoker" label="烟熏炉">
+        <option value="minecraft:respawn_anchor" label="重生锚">
+        <option value="minecraft:brewing_stand" label="酿造台">
+        <option value="minecraft:anvil" label="铁砧">
+        <option value="minecraft:anvil" label="轻微损坏的铁砧">
+        <option value="minecraft:anvil" label="严重损坏的铁砧">
+        <option value="minecraft:grindstone" label="砂轮">
+        <option value="minecraft:enchanting_table" label="附魔台">
+        <option value="minecraft:bookshelf" label="书架">
+        <option value="minecraft:chiseled_bookshelf" label="錾制书架">
+        <option value="minecraft:lectern" label="讲台">
+        <option value="minecraft:cauldron" label="炼药锅">
+        <option value="minecraft:composter" label="堆肥箱">
+        <option value="minecraft:chest" label="箱子">
+        <option value="minecraft:trapped_chest" label="陷阱箱">
+        <option value="minecraft:ender_chest" label="末影箱">
+        <option value="minecraft:barrel" label="木桶">
+        <option value="minecraft:undyed_shulker_box" label="潜影盒">
+        <option value="minecraft:white_shulker_box" label="潜影盒">
+        <option value="minecraft:yellow_shulker_box" label="潜影盒">
+        <option value="minecraft:orange_shulker_box" label="潜影盒">
+        <option value="minecraft:red_shulker_box" label="潜影盒">
+        <option value="minecraft:brown_shulker_box" label="潜影盒">
+        <option value="minecraft:black_shulker_box" label="潜影盒">
+        <option value="minecraft:gray_shulker_box" label="潜影盒">
+        <option value="minecraft:light_gray_shulker_box" label="潜影盒">
+        <option value="minecraft:lime_shulker_box" label="潜影盒">
+        <option value="minecraft:green_shulker_box" label="潜影盒">
+        <option value="minecraft:cyan_shulker_box" label="潜影盒">
+        <option value="minecraft:blue_shulker_box" label="潜影盒">
+        <option value="minecraft:light_blue_shulker_box" label="潜影盒">
+        <option value="minecraft:purple_shulker_box" label="潜影盒">
+        <option value="minecraft:magenta_shulker_box" label="潜影盒">
+        <option value="minecraft:pink_shulker_box" label="潜影盒">
+        <option value="minecraft:armor_stand" label="盔甲架">
+        <option value="minecraft:noteblock" label="音符盒">
+        <option value="minecraft:jukebox" label="唱片机">
+        <option value="minecraft:music_disc_13" label="音乐唱片">
+        <option value="minecraft:music_disc_cat" label="音乐唱片">
+        <option value="minecraft:music_disc_strad" label="音乐唱片">
+        <option value="minecraft:music_disc_stal" label="音乐唱片">
+        <option value="minecraft:music_disc_mellohi" label="音乐唱片">
+        <option value="minecraft:music_disc_mall" label="音乐唱片">
+        <option value="minecraft:music_disc_far" label="音乐唱片">
+        <option value="minecraft:music_disc_chirp" label="音乐唱片">
+        <option value="minecraft:music_disc_blocks" label="音乐唱片">
+        <option value="minecraft:music_disc_ward" label="音乐唱片">
+        <option value="minecraft:music_disc_11" label="音乐唱片">
+        <option value="minecraft:music_disc_wait" label="音乐唱片">
+        <option value="minecraft:music_disc_otherside" label="音乐唱片">
+        <option value="minecraft:music_disc_5" label="音乐唱片">
+        <option value="minecraft:music_disc_pigstep" label="音乐唱片">
+        <option value="minecraft:music_disc_relic" label="音乐唱片">
+        <option value="minecraft:disc_fragment_5" label="唱片残片">
+        <option value="minecraft:glowstone_dust" label="荧石粉">
+        <option value="minecraft:glowstone" label="荧石">
+        <option value="minecraft:redstone_lamp" label="红石灯">
+        <option value="minecraft:sea_lantern" label="海晶灯">
+        <option value="minecraft:oak_sign" label="橡木告示牌">
+        <option value="minecraft:spruce_sign" label="云杉木告示牌">
+        <option value="minecraft:birch_sign" label="白桦木告示牌">
+        <option value="minecraft:jungle_sign" label="丛林木告示牌">
+        <option value="minecraft:acacia_sign" label="金合欢木告示牌">
+        <option value="minecraft:dark_oak_sign" label="深色橡木告示牌">
+        <option value="minecraft:warped_sign" label="诡异木告示牌">
+        <option value="minecraft:crimson_sign" label="绯红木告示牌">
+        <option value="minecraft:bamboo_sign" label="竹制告示牌">
+        <option value="minecraft:cherry_sign" label="樱花木告示牌">
+        <option value="minecraft:mangrove_sign" label="红树木告示牌">
+        <option value="minecraft:oak_hanging_sign" label="橡木悬挂告示牌">
+        <option value="minecraft:cherry_hanging_sign" label="樱花木悬挂告示牌">
+        <option value="minecraft:mangrove_hanging_sign" label="红树木悬挂告示牌">
+        <option value="minecraft:dark_oak_hanging_sign" label="深色橡木悬挂告示牌">
+        <option value="minecraft:acacia_hanging_sign" label="金合欢悬挂告示牌">
+        <option value="minecraft:jungle_hanging_sign" label="丛林悬挂告示牌">
+        <option value="minecraft:warped_hanging_sign" label="翘曲悬挂告示牌">
+        <option value="minecraft:crimson_hanging_sign" label="绯红木悬挂告示牌">
+        <option value="minecraft:birch_hanging_sign" label="白桦木悬挂告示牌">
+        <option value="minecraft:spruce_hanging_sign" label="云杉木悬挂告示牌">
+        <option value="minecraft:bamboo_hanging_sign" label="竹制悬挂告示牌">
+        <option value="minecraft:painting" label="画">
+        <option value="minecraft:frame" label="物品展示框">
+        <option value="minecraft:glow_frame" label="荧光物品展示框">
+        <option value="minecraft:honey_bottle" label="蜂蜜瓶">
+        <option value="minecraft:flower_pot" label="花盆">
+        <option value="minecraft:bowl" label="碗">
+        <option value="minecraft:bucket" label="桶">
+        <option value="minecraft:milk_bucket" label="奶桶">
+        <option value="minecraft:water_bucket" label="水桶">
+        <option value="minecraft:lava_bucket" label="熔岩桶">
+        <option value="minecraft:cod_bucket" label="桶装鳕鱼">
+        <option value="minecraft:salmon_bucket" label="桶装鲑鱼">
+        <option value="minecraft:tropical_fish_bucket" label="桶装热带鱼">
+        <option value="minecraft:pufferfish_bucket" label="桶装河豚">
+        <option value="minecraft:powder_snow_bucket" label="细雪桶">
+        <option value="minecraft:axolotl_bucket" label="美西螈桶">
+        <option value="minecraft:tadpole_bucket" label="蝌蚪桶">
+        <option value="minecraft:skull" label="头颅">
+        <option value="minecraft:skull" label="僵尸的头">
+        <option value="minecraft:skull" label="苦力怕的头">
+        <option value="minecraft:skull" label="龙首">
+        <option value="minecraft:skull" label="骷髅头颅">
+        <option value="minecraft:skull" label="凋灵骷髅头颅">
+        <option value="minecraft:skull" label="猪灵头颅">
+        <option value="minecraft:beacon" label="信标">
+        <option value="minecraft:bell" label="钟">
+        <option value="minecraft:conduit" label="潮涌核心">
+        <option value="minecraft:stonecutter_block" label="切石机">
+        <option value="minecraft:coal" label="煤炭">
+        <option value="minecraft:charcoal" label="木炭">
+        <option value="minecraft:diamond" label="钻石">
+        <option value="minecraft:iron_nugget" label="铁粒">
+        <option value="minecraft:raw_iron" label="粗铁">
+        <option value="minecraft:raw_gold" label="粗金">
+        <option value="minecraft:raw_copper" label="粗铜">
+        <option value="minecraft:copper_ingot" label="铜锭">
+        <option value="minecraft:iron_ingot" label="铁锭">
+        <option value="minecraft:netherite_scrap" label="下界合金碎片">
+        <option value="minecraft:netherite_ingot" label="下界合金锭">
+        <option value="minecraft:gold_nugget" label="金粒">
+        <option value="minecraft:gold_ingot" label="金锭">
+        <option value="minecraft:emerald" label="绿宝石">
+        <option value="minecraft:quartz" label="下界石英">
+        <option value="minecraft:clay_ball" label="黏土">
+        <option value="minecraft:brick" label="红砖">
+        <option value="minecraft:netherbrick" label="下界砖">
+        <option value="minecraft:prismarine_shard" label="海晶碎片">
+        <option value="minecraft:amethyst_shard" label="紫水晶碎片">
+        <option value="minecraft:prismarine_crystals" label="海晶砂粒">
+        <option value="minecraft:nautilus_shell" label="鹦鹉螺壳">
+        <option value="minecraft:heart_of_the_sea" label="海洋之心">
+        <option value="minecraft:turtle_scute" label="海龟鳞甲">
+        <option value="minecraft:armadillo_scute" label="犰狳鳞甲">
+        <option value="minecraft:phantom_membrane" label="幻翼膜">
+        <option value="minecraft:string" label="线">
+        <option value="minecraft:feather" label="羽毛">
+        <option value="minecraft:flint" label="燧石">
+        <option value="minecraft:gunpowder" label="火药">
+        <option value="minecraft:leather" label="皮革">
+        <option value="minecraft:rabbit_hide" label="兔子皮">
+        <option value="minecraft:rabbit_foot" label="兔子脚">
+        <option value="minecraft:fire_charge" label="火焰弹">
+        <option value="minecraft:blaze_rod" label="烈焰棒">
+        <option value="minecraft:blaze_powder" label="烈焰粉">
+        <option value="minecraft:magma_cream" label="岩浆膏">
+        <option value="minecraft:fermented_spider_eye" label="发酵蛛眼">
+        <option value="minecraft:echo_shard" label="回响碎片">
+        <option value="minecraft:dragon_breath" label="龙息">
+        <option value="minecraft:shulker_shell" label="潜影壳">
+        <option value="minecraft:ghast_tear" label="恶魂之泪">
+        <option value="minecraft:slime_ball" label="黏液球">
+        <option value="minecraft:ender_pearl" label="末影珍珠">
+        <option value="minecraft:ender_eye" label="末影之眼">
+        <option value="minecraft:nether_star" label="下界之星">
+        <option value="minecraft:end_rod" label="末地烛">
+        <option value="minecraft:lightning_rod" label="避雷针">
+        <option value="minecraft:end_crystal" label="末地水晶">
+        <option value="minecraft:paper" label="纸">
+        <option value="minecraft:book" label="书">
+        <option value="minecraft:writable_book" label="书与笔">
+        <option value="minecraft:enchanted_book" label="附魔书">
+        <option value="minecraft:oak_boat" label="橡木船">
+        <option value="minecraft:cherry_boat" label="樱花木船">
+        <option value="minecraft:mangrove_boat" label="红树木船">
+        <option value="minecraft:dark_oak_boat" label="深色橡木船">
+        <option value="minecraft:acacia_boat" label="金合欢木船">
+        <option value="minecraft:jungle_boat" label="丛林木船">
+        <option value="minecraft:birch_boat" label="白桦木船">
+        <option value="minecraft:spruce_boat" label="云杉木船">
+        <option value="minecraft:bamboo_raft" label="竹筏">
+        <option value="minecraft:oak_chest_boat" label="橡木运输船">
+        <option value="minecraft:cherry_chest_boat" label="樱花木运输船">
+        <option value="minecraft:mangrove_chest_boat" label="红树木运输船">
+        <option value="minecraft:dark_oak_chest_boat" label="深色橡木运输船">
+        <option value="minecraft:bamboo_chest_raft" label="带宝箱的的竹筏">
+        <option value="minecraft:spruce_chest_boat" label="云杉木运输船">
+        <option value="minecraft:birch_chest_boat" label="白桦木运输船">
+        <option value="minecraft:jungle_chest_boat" label="丛林木运输船">
+        <option value="minecraft:acacia_chest_boat" label="金合欢木运输船">
+        <option value="minecraft:rail" label="铁轨">
+        <option value="minecraft:golden_rail" label="动力铁轨">
+        <option value="minecraft:detector_rail" label="探测铁轨">
+        <option value="minecraft:activator_rail" label="激活铁轨">
+        <option value="minecraft:minecart" label="矿车">
+        <option value="minecraft:chest_minecart" label="运输矿车">
+        <option value="minecraft:hopper_minecart" label="漏斗矿车">
+        <option value="minecraft:tnt_minecart" label="TNT 矿车">
+        <option value="minecraft:redstone" label="红石粉">
+        <option value="minecraft:redstone_block" label="红石块">
+        <option value="minecraft:redstone_torch" label="红石火把">
+        <option value="minecraft:lever" label="拉杆">
+        <option value="minecraft:wooden_button" label="橡木按钮">
+        <option value="minecraft:spruce_button" label="云杉木按钮">
+        <option value="minecraft:birch_button" label="白桦木按钮">
+        <option value="minecraft:jungle_button" label="丛林木按钮">
+        <option value="minecraft:crimson_button" label="绯红木按钮">
+        <option value="minecraft:stone_button" label="石头按钮">
+        <option value="minecraft:bamboo_button" label="竹制按钮">
+        <option value="minecraft:cherry_button" label="樱花木按钮">
+        <option value="minecraft:mangrove_button" label="红树木按钮">
+        <option value="minecraft:dark_oak_button" label="深色橡木按钮">
+        <option value="minecraft:polished_blackstone_button" label="磨制黑石按钮">
+        <option value="minecraft:acacia_button" label="金合欢木按钮">
+        <option value="minecraft:warped_button" label="诡异木按钮">
+        <option value="minecraft:tripwire_hook" label="绊线钩">
+        <option value="minecraft:wooden_pressure_plate" label="橡木压力板">
+        <option value="minecraft:spruce_pressure_plate" label="云杉木压力板">
+        <option value="minecraft:birch_pressure_plate" label="白桦木压力板">
+        <option value="minecraft:jungle_pressure_plate" label="丛林木压力板">
+        <option value="minecraft:acacia_pressure_plate" label="金合欢木压力板">
+        <option value="minecraft:dark_oak_pressure_plate" label="深色橡木压力板">
+        <option value="minecraft:mangrove_pressure_plate" label="红树木压力板">
+        <option value="minecraft:cherry_pressure_plate" label="樱花木压力板">
+        <option value="minecraft:bamboo_pressure_plate" label="竹制压力板">
+        <option value="minecraft:crimson_pressure_plate" label="绯红木压力板">
+        <option value="minecraft:warped_pressure_plate" label="诡异木压力板">
+        <option value="minecraft:stone_pressure_plate" label="石质压力板">
+        <option value="minecraft:light_weighted_pressure_plate" label="测重压力板（轻型）">
+        <option value="minecraft:heavy_weighted_pressure_plate" label="测重压力板（重型）">
+        <option value="minecraft:polished_blackstone_pressure_plate" label="磨制黑石压力板">
+        <option value="minecraft:observer" label="侦测器">
+        <option value="minecraft:daylight_detector" label="阳光探测器">
+        <option value="minecraft:repeater" label="红石中继器">
+        <option value="minecraft:comparator" label="红石比较器">
+        <option value="minecraft:hopper" label="漏斗">
+        <option value="minecraft:dropper" label="投掷器">
+        <option value="minecraft:dispenser" label="发射器">
+        <option value="minecraft:piston" label="活塞">
+        <option value="minecraft:sticky_piston" label="黏性活塞">
+        <option value="minecraft:tnt" label="TNT">
+        <option value="minecraft:name_tag" label="命名牌">
+        <option value="minecraft:loom" label="织布机">
+        <option value="minecraft:banner" label="黑色旗帜">
+        <option value="minecraft:banner" label="灰色旗帜">
+        <option value="minecraft:banner" label="淡灰色旗帜">
+        <option value="minecraft:banner" label="白色旗帜">
+        <option value="minecraft:banner" label="淡蓝色旗帜">
+        <option value="minecraft:banner" label="橙色旗帜">
+        <option value="minecraft:banner" label="红色旗帜">
+        <option value="minecraft:banner" label="蓝色旗帜">
+        <option value="minecraft:banner" label="紫色旗帜">
+        <option value="minecraft:banner" label="品红色旗帜">
+        <option value="minecraft:banner" label="青色旗帜">
+        <option value="minecraft:banner" label="绿色旗帜">
+        <option value="minecraft:banner" label="黄绿色旗帜">
+        <option value="minecraft:banner" label="黄色旗帜">
+        <option value="minecraft:banner" label="棕色旗帜">
+        <option value="minecraft:banner" label="粉红色旗帜">
+        <option value="minecraft:creeper_banner_pattern" label="旗帜图案">
+        <option value="minecraft:skull_banner_pattern" label="旗帜图案">
+        <option value="minecraft:flower_banner_pattern" label="旗帜图案">
+        <option value="minecraft:mojang_banner_pattern" label="旗帜图案">
+        <option value="minecraft:field_masoned_banner_pattern" label="旗帜图案">
+        <option value="minecraft:bordure_indented_banner_pattern" label="旗帜图案">
+        <option value="minecraft:piglin_banner_pattern" label="旗帜图案">
+        <option value="minecraft:globe_banner_pattern" label="旗帜图案">
+        <option value="minecraft:angler_pottery_sherd" label="垂钓纹样陶片">
+        <option value="minecraft:explorer_pottery_sherd" label="探险纹样陶片">
+        <option value="minecraft:danger_pottery_sherd" label="危机纹样陶片">
+        <option value="minecraft:burn_pottery_sherd" label="烈焰纹样陶片">
+        <option value="minecraft:brewer_pottery_sherd" label="佳酿纹样陶片">
+        <option value="minecraft:blade_pottery_sherd" label="利刃纹样陶片">
+        <option value="minecraft:arms_up_pottery_sherd" label="举臂纹样陶片">
+        <option value="minecraft:archer_pottery_sherd" label="弓箭纹样陶片">
+        <option value="minecraft:friend_pottery_sherd" label="挚友纹样陶片">
+        <option value="minecraft:heart_pottery_sherd" label="爱心纹样陶片">
+        <option value="minecraft:heartbreak_pottery_sherd" label="心碎纹样陶片">
+        <option value="minecraft:howl_pottery_sherd" label="狼嚎纹样陶片">
+        <option value="minecraft:miner_pottery_sherd" label="采矿纹样陶片">
+        <option value="minecraft:mourner_pottery_sherd" label="哀悼纹样陶片">
+        <option value="minecraft:plenty_pottery_sherd" label="富饶纹样陶片">
+        <option value="minecraft:snort_pottery_sherd" label="嗅探纹样陶片">
+        <option value="minecraft:skull_pottery_sherd" label="头颅纹样陶片">
+        <option value="minecraft:shelter_pottery_sherd" label="树荫纹样陶片">
+        <option value="minecraft:sheaf_pottery_sherd" label="麦捆纹样陶片">
+        <option value="minecraft:prize_pottery_sherd" label="珍宝纹样陶片">
+        <option value="minecraft:netherite_upgrade_smithing_template" label="锻造模板">
+        <option value="minecraft:sentry_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:vex_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:wild_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:coast_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:dune_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:wayfinder_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:shaper_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:raiser_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:host_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:ward_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:silence_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:tide_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:snout_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:rib_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:eye_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:spire_armor_trim_smithing_template" label="锻造模板">
+        <option value="minecraft:firework_rocket" label="焰火火箭">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:firework_star" label="焰火之星">
+        <option value="minecraft:chain" label="锁链">
+        <option value="minecraft:target" label="标靶">
+        <option value="minecraft:decorated_pot" label="装饰罐">
+        <option value="minecraft:nether_wart_block" label="下界疣方块">
+        <option value="minecraft:warped_wart_block" label="诡异疣方块">
+        <option value="minecraft:shroomlight" label="菌光体">
+        <option value="minecraft:crimson_nylium" label="绯红菌岩">
+        <option value="minecraft:warped_nylium" label="诡异菌岩">
+        <option value="minecraft:netherrack" label="下界岩">
+        <option value="minecraft:basalt" label="玄武岩">
+        <option value="minecraft:polished_basalt" label="磨制玄武岩">
+        <option value="minecraft:smooth_basalt" label="平滑玄武岩">
+        <option value="minecraft:soul_soil" label="灵魂土">
+        <option value="minecraft:dirt" label="泥土">
+        <option value="minecraft:dirt" label="砂土">
+        <option value="minecraft:farmland" label="耕地">
+        <option value="minecraft:grass_block" label="草方块">
+        <option value="minecraft:grass_path" label="土径">
+        <option value="minecraft:podzol" label="灰化土">
+        <option value="minecraft:mycelium" label="菌丝">
+        <option value="minecraft:mud" label="泥巴">
+        <option value="minecraft:stone" label="石头">
+        <option value="minecraft:iron_ore" label="铁矿石">
+        <option value="minecraft:emerald_ore" label="绿宝石矿石">
+        <option value="minecraft:copper_ore" label="铜矿石">
+        <option value="minecraft:coal_ore" label="煤矿石">
+        <option value="minecraft:redstone_ore" label="红石矿石">
+        <option value="minecraft:lapis_ore" label="青金石矿石">
+        <option value="minecraft:diamond_ore" label="钻石矿石">
+        <option value="minecraft:gold_ore" label="金矿石">
+        <option value="minecraft:quartz_ore" label="下界石英矿石">
+        <option value="minecraft:nether_gold_ore" label="下界金矿石">
+        <option value="minecraft:ancient_debris" label="远古残骸">
+        <option value="minecraft:deepslate_iron_ore" label="深层铁矿石">
+        <option value="minecraft:deepslate_gold_ore" label="深层金矿石">
+        <option value="minecraft:deepslate_diamond_ore" label="深层钻石矿石">
+        <option value="minecraft:deepslate_lapis_ore" label="深板岩青金石矿石">
+        <option value="minecraft:deepslate_redstone_ore" label="深层红石矿石">
+        <option value="minecraft:deepslate_emerald_ore" label="深层绿宝石矿石">
+        <option value="minecraft:deepslate_coal_ore" label="深层煤矿石">
+        <option value="minecraft:deepslate_copper_ore" label="深层铜矿石">
+        <option value="minecraft:gravel" label="砂砾">
+        <option value="minecraft:granite" label="花岗岩">
+        <option value="minecraft:polished_andesite" label="磨制安山岩">
+        <option value="minecraft:polished_diorite" label="磨制闪长岩">
+        <option value="minecraft:polished_granite" label="磨制花岗岩">
+        <option value="minecraft:deepslate" label="深板岩">
+        <option value="minecraft:blackstone" label="黑石">
+        <option value="minecraft:andesite" label="安山岩">
+        <option value="minecraft:diorite" label="闪长岩">
+        <option value="minecraft:polished_blackstone" label="磨制黑石">
+        <option value="minecraft:polished_deepslate" label="磨制深板岩">
+        <option value="minecraft:sand" label="沙子">
+        <option value="minecraft:sand" label="红沙">
+        <option value="minecraft:cactus" label="仙人掌">
+        <option value="minecraft:oak_log" label="橡树原木">
+        <option value="minecraft:stripped_oak_log" label="去皮橡树原木">
+        <option value="minecraft:spruce_log" label="云杉原木">
+        <option value="minecraft:stripped_spruce_log" label="去皮云杉原木">
+        <option value="minecraft:birch_log" label="桦树原木">
+        <option value="minecraft:stripped_birch_log" label="去皮桦树原木">
+        <option value="minecraft:jungle_log" label="丛林原木">
+        <option value="minecraft:stripped_jungle_log" label="去皮丛林原木">
+        <option value="minecraft:acacia_log" label="金合欢原木">
+        <option value="minecraft:stripped_acacia_log" label="去皮金合欢原木">
+        <option value="minecraft:dark_oak_log" label="深色橡树原木">
+        <option value="minecraft:stripped_dark_oak_log" label="去皮深色橡树原木">
+        <option value="minecraft:mangrove_log" label="红树木原木">
+        <option value="minecraft:stripped_mangrove_log" label="去皮红树木原木">
+        <option value="minecraft:cherry_log" label="樱花原木">
+        <option value="minecraft:stripped_cherry_log" label="去皮樱花原木">
+        <option value="minecraft:crimson_stem" label="绯红菌柄">
+        <option value="minecraft:stripped_crimson_stem" label="去皮绯红菌柄">
+        <option value="minecraft:warped_stem" label="诡异菌柄">
+        <option value="minecraft:stripped_warped_stem" label="去皮诡异菌柄">
+        <option value="minecraft:oak_wood" label="橡木">
+        <option value="minecraft:spruce_wood" label="云杉木">
+        <option value="minecraft:birch_wood" label="白桦木">
+        <option value="minecraft:jungle_wood" label="丛林木">
+        <option value="minecraft:acacia_wood" label="金合欢木">
+        <option value="minecraft:dark_oak_wood" label="深色橡木">
+        <option value="minecraft:stripped_oak_wood" label="去皮橡木">
+        <option value="minecraft:stripped_spruce_wood" label="去皮云杉木">
+        <option value="minecraft:stripped_birch_wood" label="去皮白桦木">
+        <option value="minecraft:stripped_jungle_wood" label="去皮丛林木">
+        <option value="minecraft:stripped_acacia_wood" label="去皮金合欢木">
+        <option value="minecraft:stripped_dark_oak_wood" label="去皮深色橡木">
+        <option value="minecraft:mangrove_wood" label="红树木木材">
+        <option value="minecraft:stripped_mangrove_wood" label="去皮红树木木材">
+        <option value="minecraft:cherry_wood" label="樱花木">
+        <option value="minecraft:stripped_bamboo_block" label="去皮竹块">
+        <option value="minecraft:bamboo_block" label="竹子方块">
+        <option value="minecraft:stripped_warped_hyphae" label="去皮诡异菌丝">
+        <option value="minecraft:warped_hyphae" label="诡异菌丝">
+        <option value="minecraft:stripped_crimson_hyphae" label="去皮绯红菌核">
+        <option value="minecraft:crimson_hyphae" label="绯红菌核">
+        <option value="minecraft:stripped_cherry_wood" label="去皮樱花木">
+        <option value="minecraft:oak_leaves" label="橡树叶">
+        <option value="minecraft:spruce_leaves" label="云杉树叶">
+        <option value="minecraft:birch_leaves" label="桦树叶">
+        <option value="minecraft:jungle_leaves" label="丛林树叶">
+        <option value="minecraft:acacia_leaves" label="金合欢树叶">
+        <option value="minecraft:dark_oak_leaves" label="深色橡树叶">
+        <option value="minecraft:mangrove_leaves" label="红树木树叶">
+        <option value="minecraft:cherry_leaves" label="樱花树叶">
+        <option value="minecraft:azalea_leaves" label="杜鹃花叶">
+        <option value="minecraft:azalea_leaves_flowered" label="盛开的杜鹃花树叶">
+        <option value="minecraft:oak_sapling" label="橡树苗">
+        <option value="minecraft:spruce_sapling" label="云杉树苗">
+        <option value="minecraft:birch_sapling" label="桦树苗">
+        <option value="minecraft:jungle_sapling" label="丛林树苗">
+        <option value="minecraft:acacia_sapling" label="金合欢树苗">
+        <option value="minecraft:dark_oak_sapling" label="深色橡树苗">
+        <option value="minecraft:mangrove_propagule" label="红树木繁殖体">
+        <option value="minecraft:cherry_sapling" label="樱花树苗">
+        <option value="minecraft:bee_nest" label="蜂巢">
+        <option value="minecraft:wheat_seeds" label="种子">
+        <option value="minecraft:pumpkin_seeds" label="南瓜种子">
+        <option value="minecraft:melon_seeds" label="西瓜种子">
+        <option value="minecraft:beetroot_seeds" label="甜菜种子">
+        <option value="minecraft:torchflower_seeds" label="火把花种子">
+        <option value="minecraft:pitcher_pod" label="猪笼草荚果">
+        <option value="minecraft:wheat" label="小麦">
+        <option value="minecraft:beetroot" label="甜菜根">
+        <option value="minecraft:potato" label="马铃薯">
+        <option value="minecraft:poisonous_potato" label="毒马铃薯">
+        <option value="minecraft:carrot" label="胡萝卜">
+        <option value="minecraft:golden_carrot" label="金胡萝卜">
+        <option value="minecraft:apple" label="苹果">
+        <option value="minecraft:golden_apple" label="金苹果">
+        <option value="minecraft:enchanted_golden_apple" label="附魔金苹果">
+        <option value="minecraft:melon_block" label="西瓜">
+        <option value="minecraft:melon_slice" label="西瓜片">
+        <option value="minecraft:glistering_melon_slice" label="闪烁的西瓜片">
+        <option value="minecraft:sweet_berries" label="甜浆果">
+        <option value="minecraft:glow_berries" label="发光浆果">
+        <option value="minecraft:pumpkin" label="南瓜">
+        <option value="minecraft:carved_pumpkin" label="雕刻过的南瓜">
+        <option value="minecraft:lit_pumpkin" label="南瓜灯">
+        <option value="minecraft:honeycomb" label="蜜脾">
+        <option value="minecraft:tallgrass" label="蕨">
+        <option value="minecraft:double_plant" label="大型蕨">
+        <option value="minecraft:tallgrass" label="草">
+        <option value="minecraft:double_plant" label="高草丛">
+        <option value="minecraft:nether_sprouts" label="下界苗">
+        <option value="minecraft:fire_coral" label="火珊瑚">
+        <option value="minecraft:brain_coral" label="脑纹珊瑚">
+        <option value="minecraft:bubble_coral" label="气泡珊瑚">
+        <option value="minecraft:tube_coral" label="管珊瑚">
+        <option value="minecraft:horn_coral" label="鹿角珊瑚">
+        <option value="minecraft:dead_fire_coral" label="失活的火珊瑚">
+        <option value="minecraft:dead_brain_coral" label="失活的脑纹珊瑚">
+        <option value="minecraft:dead_bubble_coral" label="失活的气泡珊瑚">
+        <option value="minecraft:dead_tube_coral" label="失活的管珊瑚">
+        <option value="minecraft:fire_coral_fan" label="火珊瑚扇">
+        <option value="minecraft:dead_horn_coral" label="失活的鹿角珊瑚">
+        <option value="minecraft:brain_coral_fan" label="脑纹珊瑚扇">
+        <option value="minecraft:bubble_coral_fan" label="气泡珊瑚扇">
+        <option value="minecraft:tube_coral_fan" label="管珊瑚扇">
+        <option value="minecraft:horn_coral_fan" label="鹿角珊瑚扇">
+        <option value="minecraft:dead_fire_coral_fan" label="失活的火珊瑚扇">
+        <option value="minecraft:dead_brain_coral_fan" label="失活的脑纹珊瑚扇">
+        <option value="minecraft:dead_bubble_coral_fan" label="失活的气泡珊瑚扇">
+        <option value="minecraft:dead_tube_coral_fan" label="失活的管珊瑚扇">
+        <option value="minecraft:dead_horn_coral_fan" label="失活的鹿角珊瑚扇">
+        <option value="minecraft:crimson_roots" label="绯红菌索">
+        <option value="minecraft:warped_roots" label="诡异菌根">
+        <option value="minecraft:yellow_flower" label="蒲公英">
+        <option value="minecraft:poppy" label="虞美人">
+        <option value="minecraft:blue_orchid" label="兰花">
+        <option value="minecraft:oxeye_daisy" label="滨菊">
+        <option value="minecraft:pink_tulip" label="粉红色郁金香">
+        <option value="minecraft:white_tulip" label="白色郁金香">
+        <option value="minecraft:orange_tulip" label="橙色郁金香">
+        <option value="minecraft:red_tulip" label="红色郁金香">
+        <option value="minecraft:azure_bluet" label="蓝花美耳草">
+        <option value="minecraft:allium" label="绒球葱">
+        <option value="minecraft:cornflower" label="矢车菊">
+        <option value="minecraft:lily_of_the_valley" label="铃兰">
+        <option value="minecraft:double_plant" label="向日葵">
+        <option value="minecraft:double_plant" label="丁香">
+        <option value="minecraft:double_plant" label="玫瑰丛">
+        <option value="minecraft:double_plant" label="牡丹">
+        <option value="minecraft:pitcher_plant" label="猪笼草">
+        <option value="minecraft:pink_petals" label="粉红色花瓣">
+        <option value="minecraft:wither_rose" label="凋零玫瑰">
+        <option value="minecraft:torchflower" label="火把花">
+        <option value="minecraft:white_dye" label="白色染料">
+        <option value="minecraft:light_gray_dye" label="淡灰色染料">
+        <option value="minecraft:gray_dye" label="灰色染料">
+        <option value="minecraft:green_dye" label="绿色染料">
+        <option value="minecraft:black_dye" label="黑色染料">
+        <option value="minecraft:cyan_dye" label="青色染料">
+        <option value="minecraft:brown_dye" label="棕色染料">
+        <option value="minecraft:light_blue_dye" label="淡蓝色染料">
+        <option value="minecraft:red_dye" label="红色染料">
+        <option value="minecraft:blue_dye" label="蓝色染料">
+        <option value="minecraft:orange_dye" label="橙色染料">
+        <option value="minecraft:purple_dye" label="紫色染料">
+        <option value="minecraft:yellow_dye" label="黄色染料">
+        <option value="minecraft:magenta_dye" label="品红色染料">
+        <option value="minecraft:lime_dye" label="黄绿色染料">
+        <option value="minecraft:pink_dye" label="粉红色染料">
+        <option value="minecraft:ink_sac" label="墨囊">
+        <option value="minecraft:glow_ink_sac" label="荧光墨囊">
+        <option value="minecraft:cocoa_beans" label="可可豆">
+        <option value="minecraft:lapis_lazuli" label="青金石">
+        <option value="minecraft:bone_meal" label="骨粉">
+        <option value="minecraft:vine" label="藤蔓">
+        <option value="minecraft:weeping_vines" label="垂泪藤">
+        <option value="minecraft:twisting_vines" label="缠怨藤">
+        <option value="minecraft:waterlily" label="睡莲">
+        <option value="minecraft:seagrass" label="海草">
+        <option value="minecraft:kelp" label="海带">
+        <option value="minecraft:deadbush" label="枯萎的灌木">
+        <option value="minecraft:bamboo" label="竹子">
+        <option value="minecraft:snow" label="雪">
+        <option value="minecraft:ice" label="冰">
+        <option value="minecraft:packed_ice" label="浮冰">
+        <option value="minecraft:blue_ice" label="蓝冰">
+        <option value="minecraft:snow_layer" label="雪层">
+        <option value="minecraft:pointed_dripstone" label="滴水石锥">
+        <option value="minecraft:dripstone_block" label="滴水石块">
+        <option value="minecraft:moss_carpet" label="苔藓地毯">
+        <option value="minecraft:moss_block" label="苔藓块">
+        <option value="minecraft:dirt_with_roots" label="缠根泥土">
+        <option value="minecraft:hanging_roots" label="垂根">
+        <option value="minecraft:mangrove_roots" label="红树木根">
+        <option value="minecraft:muddy_mangrove_roots" label="沾泥的红树木根">
+        <option value="minecraft:big_dripleaf" label="大型垂滴叶">
+        <option value="minecraft:small_dripleaf_block" label="小型垂滴叶">
+        <option value="minecraft:spore_blossom" label="孢子花">
+        <option value="minecraft:azalea" label="杜鹃花">
+        <option value="minecraft:flowering_azalea" label="盛开的杜鹃花">
+        <option value="minecraft:glow_lichen" label="发光地衣">
+        <option value="minecraft:amethyst_block" label="紫水晶方块">
+        <option value="minecraft:budding_amethyst" label="紫水晶母岩">
+        <option value="minecraft:amethyst_cluster" label="紫水晶簇">
+        <option value="minecraft:large_amethyst_bud" label="大型紫晶芽">
+        <option value="minecraft:medium_amethyst_bud" label="中型紫晶芽">
+        <option value="minecraft:small_amethyst_bud" label="小型紫晶芽">
+        <option value="minecraft:tuff" label="凝灰岩">
+        <option value="minecraft:calcite" label="方解石">
+        <option value="minecraft:chicken" label="生鸡肉">
+        <option value="minecraft:porkchop" label="生猪排">
+        <option value="minecraft:beef" label="生牛肉">
+        <option value="minecraft:mutton" label="生羊肉">
+        <option value="minecraft:rabbit" label="生兔肉">
+        <option value="minecraft:cod" label="生鳕鱼">
+        <option value="minecraft:salmon" label="生鲑鱼">
+        <option value="minecraft:tropical_fish" label="热带鱼">
+        <option value="minecraft:pufferfish" label="河豚">
+        <option value="minecraft:brown_mushroom" label="棕色蘑菇">
+        <option value="minecraft:red_mushroom" label="红蘑菇">
+        <option value="minecraft:crimson_fungus" label="绯红菌">
+        <option value="minecraft:warped_fungus" label="诡异真菌">
+        <option value="minecraft:brown_mushroom_block" label="棕色蘑菇方块">
+        <option value="minecraft:red_mushroom_block" label="红蘑菇方块">
+        <option value="minecraft:brown_mushroom_block" label="蘑菇柄">
+        <option value="minecraft:brown_mushroom_block" label="蘑菇">
+        <option value="minecraft:egg" label="鸡蛋">
+        <option value="minecraft:sugar_cane" label="甘蔗">
+        <option value="minecraft:sugar" label="糖">
+        <option value="minecraft:rotten_flesh" label="腐肉">
+        <option value="minecraft:bone" label="骨头">
+        <option value="minecraft:web" label="蜘蛛网">
+        <option value="minecraft:spider_eye" label="蜘蛛眼">
+        <option value="minecraft:mob_spawner" label="刷怪笼">
+        <option value="minecraft:end_portal_frame" label="末地传送门框架">
+        <option value="minecraft:monster_egg" label="被虫蚀的石头">
+        <option value="minecraft:monster_egg" label="被虫蚀的圆石">
+        <option value="minecraft:monster_egg" label="被虫蚀的石砖">
+        <option value="minecraft:monster_egg" label="被虫蚀的苔石砖">
+        <option value="minecraft:monster_egg" label="被虫蚀的裂纹石砖">
+        <option value="minecraft:monster_egg" label="被虫蚀的錾制石砖">
+        <option value="minecraft:infested_deepslate" label="被虫蚀的深板岩">
+        <option value="minecraft:dragon_egg" label="龙蛋">
+        <option value="minecraft:turtle_egg" label="海龟蛋">
+        <option value="minecraft:sniffer_egg" label="嗅探蛋">
+        <option value="minecraft:frog_spawn" label="青蛙卵">
+        <option value="minecraft:pearlescent_froglight" label="珠光蛙明灯">
+        <option value="minecraft:verdant_froglight" label="青翠蛙明灯">
+        <option value="minecraft:ochre_froglight" label="赭黄蛙明灯">
+        <option value="minecraft:obsidian" label="黑曜石">
+        <option value="minecraft:crying_obsidian" label="哭泣的黑曜石">
+        <option value="minecraft:bedrock" label="基岩">
+        <option value="minecraft:soul_sand" label="灵魂沙">
+        <option value="minecraft:magma" label="岩浆块">
+        <option value="minecraft:nether_wart" label="下界疣">
+        <option value="minecraft:end_stone" label="末地石">
+        <option value="minecraft:chorus_flower" label="紫颂花">
+        <option value="minecraft:chorus_plant" label="紫颂植株">
+        <option value="minecraft:chorus_fruit" label="紫颂果">
+        <option value="minecraft:popped_chorus_fruit" label="爆裂紫颂果">
+        <option value="minecraft:sponge" label="海绵">
+        <option value="minecraft:sponge" label="湿海绵">
+        <option value="minecraft:coral_block" label="管珊瑚块">
+        <option value="minecraft:coral_block" label="脑纹珊瑚块">
+        <option value="minecraft:coral_block" label="气泡珊瑚块">
+        <option value="minecraft:coral_block" label="火珊瑚块">
+        <option value="minecraft:coral_block" label="鹿角珊瑚块">
+        <option value="minecraft:coral_block" label="失活的管珊瑚块">
+        <option value="minecraft:coral_block" label="失活的脑纹珊瑚块">
+        <option value="minecraft:coral_block" label="失活的气泡珊瑚块">
+        <option value="minecraft:coral_block" label="失活的火珊瑚块">
+        <option value="minecraft:coral_block" label="失活的鹿角珊瑚块">
+        <option value="minecraft:sculk" label="潜声">
+        <option value="minecraft:sculk_vein" label="幽匿脉络">
+        <option value="minecraft:sculk_catalyst" label="幽匿催发体">
+        <option value="minecraft:sculk_shrieker" label="幽匿尖啸体">
+        <option value="minecraft:sculk_sensor" label="幽匿感测体">
+        <option value="minecraft:calibrated_sculk_sensor" label="已校准潜声感测器">
+        <option value="minecraft:reinforced_deepslate" label="强化深板岩">
+        <option value="minecraft:chicken_spawn_egg" label="鸡生成蛋">
+        <option value="minecraft:bee_spawn_egg" label="蜜蜂生成蛋">
+        <option value="minecraft:cow_spawn_egg" label="牛生成蛋">
+        <option value="minecraft:pig_spawn_egg" label="猪生成蛋">
+        <option value="minecraft:sheep_spawn_egg" label="羊生成蛋">
+        <option value="minecraft:wolf_spawn_egg" label="狼生成蛋">
+        <option value="minecraft:polar_bear_spawn_egg" label="北极熊生成蛋">
+        <option value="minecraft:ocelot_spawn_egg" label="豹猫生成蛋">
+        <option value="minecraft:cat_spawn_egg" label="猫生成蛋">
+        <option value="minecraft:mooshroom_spawn_egg" label="哞菇生成蛋">
+        <option value="minecraft:bat_spawn_egg" label="蝙蝠生成蛋">
+        <option value="minecraft:parrot_spawn_egg" label="鹦鹉生成蛋">
+        <option value="minecraft:rabbit_spawn_egg" label="兔子生成蛋">
+        <option value="minecraft:llama_spawn_egg" label="羊驼生成蛋">
+        <option value="minecraft:horse_spawn_egg" label="马生成蛋">
+        <option value="minecraft:donkey_spawn_egg" label="驴生成蛋">
+        <option value="minecraft:mule_spawn_egg" label="骡子生成蛋">
+        <option value="minecraft:skeleton_horse_spawn_egg" label="骷髅马生成蛋">
+        <option value="minecraft:zombie_horse_spawn_egg" label="僵尸马生成蛋">
+        <option value="minecraft:tropical_fish_spawn_egg" label="热带鱼生成蛋">
+        <option value="minecraft:cod_spawn_egg" label="鳕鱼生成蛋">
+        <option value="minecraft:pufferfish_spawn_egg" label="河豚生成蛋">
+        <option value="minecraft:salmon_spawn_egg" label="鲑鱼生成蛋">
+        <option value="minecraft:dolphin_spawn_egg" label="海豚生成蛋">
+        <option value="minecraft:turtle_spawn_egg" label="海龟生成蛋">
+        <option value="minecraft:panda_spawn_egg" label="熊猫生成蛋">
+        <option value="minecraft:fox_spawn_egg" label="狐狸生成蛋">
+        <option value="minecraft:creeper_spawn_egg" label="苦力怕生成蛋">
+        <option value="minecraft:enderman_spawn_egg" label="末影人生成蛋">
+        <option value="minecraft:silverfish_spawn_egg" label="蠹虫生成蛋">
+        <option value="minecraft:skeleton_spawn_egg" label="骷髅生成蛋">
+        <option value="minecraft:wither_skeleton_spawn_egg" label="凋灵骷髅生成蛋">
+        <option value="minecraft:stray_spawn_egg" label="流浪者生成蛋">
+        <option value="minecraft:slime_spawn_egg" label="史莱姆生成蛋">
+        <option value="minecraft:spider_spawn_egg" label="蜘蛛生成蛋">
+        <option value="minecraft:zombie_spawn_egg" label="僵尸生成蛋">
+        <option value="minecraft:zombie_pigman_spawn_egg" label="僵尸猪灵生成蛋">
+        <option value="minecraft:husk_spawn_egg" label="尸傀生成蛋">
+        <option value="minecraft:drowned_spawn_egg" label="溺尸生成蛋">
+        <option value="minecraft:squid_spawn_egg" label="鱿鱼生成蛋">
+        <option value="minecraft:glow_squid_spawn_egg" label="发光鱿鱼生成蛋">
+        <option value="minecraft:cave_spider_spawn_egg" label="洞穴蜘蛛生成蛋">
+        <option value="minecraft:witch_spawn_egg" label="女巫生成蛋">
+        <option value="minecraft:guardian_spawn_egg" label="守卫者生成蛋">
+        <option value="minecraft:elder_guardian_spawn_egg" label="远古守卫者生成蛋">
+        <option value="minecraft:endermite_spawn_egg" label="末影螨生成蛋">
+        <option value="minecraft:magma_cube_spawn_egg" label="岩浆怪生成蛋">
+        <option value="minecraft:strider_spawn_egg" label="炽足兽生成蛋">
+        <option value="minecraft:hoglin_spawn_egg" label="疣猪兽生成蛋">
+        <option value="minecraft:piglin_spawn_egg" label="猪灵生成蛋">
+        <option value="minecraft:zoglin_spawn_egg" label="僵尸疣猪兽生成蛋">
+        <option value="minecraft:piglin_brute_spawn_egg" label="猪灵蛮兵生成蛋">
+        <option value="minecraft:goat_spawn_egg" label="山羊生成蛋">
+        <option value="minecraft:axolotl_spawn_egg" label="美西螈生成蛋">
+        <option value="minecraft:warden_spawn_egg" label="循声守卫生成蛋">
+        <option value="minecraft:allay_spawn_egg" label="悦灵生成蛋">
+        <option value="minecraft:frog_spawn_egg" label="青蛙生成蛋">
+        <option value="minecraft:tadpole_spawn_egg" label="蝌蚪生成蛋">
+        <option value="minecraft:trader_llama_spawn_egg" label="行商羊驼生成蛋">
+        <option value="minecraft:camel_spawn_egg" label="骆驼生成蛋">
+        <option value="minecraft:ghast_spawn_egg" label="恶魂生成蛋">
+        <option value="minecraft:blaze_spawn_egg" label="烈焰生成蛋">
+        <option value="minecraft:shulker_spawn_egg" label="潜影贝生成蛋">
+        <option value="minecraft:vindicator_spawn_egg" label="卫道士生成蛋">
+        <option value="minecraft:evoker_spawn_egg" label="唤魔者生成蛋">
+        <option value="minecraft:vex_spawn_egg" label="猥傀生成蛋">
+        <option value="minecraft:villager_spawn_egg" label="村民生成蛋">
+        <option value="minecraft:wandering_trader_spawn_egg" label="流浪商人生成蛋">
+        <option value="minecraft:zombie_villager_spawn_egg" label="僵尸村民生成蛋">
+        <option value="minecraft:phantom_spawn_egg" label="幻翼生成蛋">
+        <option value="minecraft:pillager_spawn_egg" label="掠夺者生成蛋">
+        <option value="minecraft:ravager_spawn_egg" label="劫掠兽生成蛋">
+        <option value="minecraft:iron_golem_spawn_egg" label="铁傀儡生成蛋">
+        <option value="minecraft:snow_golem_spawn_egg" label="雪傀儡生成蛋">
+        <option value="minecraft:sniffer_spawn_egg" label="嗅探兽生成蛋">
+        <option value="minecraft:armadillo_spawn_egg" label="犰狳生成蛋">
+    </datalist>
+
+    <div class="box card card-body" id="show">
+        <p class="title text text-blue">命令输出</p>
+        <textarea id="result" class="form-control"></textarea>
+    </div>
+
+    <div class="box card card-body" id="mode">
+        <p class="title text text-blue">游戏模式</p>
+        <div class="in btn-group" id="gamemode">
+            <input type="radio" class="btn btn-outline-blue" name="gamemode-radio-1" value="survival">生存</input>
+            <input type="radio" class="btn btn-outline-blue" name="gamemode-radio-1" value="creative">创造</input>
+            <input type="radio" class="btn btn-outline-blue" name="gamemode-radio-1" value="adventure">冒险</input>
+        </div>
+        <input type="button" class="btn btn-blue" id="gamemode-submit" value="生成"></input>
+    </div>
+    </div>
+    <div class="box card card-body" id="rule">
+        <p class="title text text-blue">游戏规则</p>
+        <div class="in btn-group" id="gamerule">
+            <input type="radio" class="btn btn-outline-blue" name="gamerule" value="true">启用</input>
+            <input type="radio" class="btn btn-outline-blue" name="gamerule" value="false">禁用</input>
+            <select name="gamerule-select-1" id="gamerule-select-1">
+                <option value="">--请选择--</option>
+                <option value="commandBlockOutput">广播命令方块输出</option>
+                <option value="commandBlocksEnabled">启用命令方块</option>
+                <option value="doDaylightCycle">游戏内时间流逝</option>
+                <option value="doEntityDrops">非生物实体掉落</option>
+                <option value="doFireTick">火焰蔓延</option>
+                <option value="doImmediateRespawn">立即重生</option>
+                <option value="doInsomnia">生成幻翼</option>
+                <option value="doLimitedCrafting">合成需要配方</option>
+                <option value="doMobLoot">生物战利品掉落</option>
+                <option value="doMobSpawning">生成生物</option>
+                <option value="doTileDrops">方块掉落</option>
+                <option value="doWeatherCycle">天气更替</option>
+                <option value="drowningDamage">溺水伤害</option>
+                <option value="fallDamage">摔落伤害</option>
+                <option value="fireDamage">火焰伤害</option>
+                <option value="freezeDamage">冰冻伤害</option>
+                <option value="keepInventory">死亡后保留物品栏</option>
+                <option value="mobGriefing">允许破坏性生物行为</option>
+                <option value="naturalRegeneration">生命值自然恢复</option>
+                <option value="projectilesCanBreakBlocks">弹射物能否破坏方块</option>
+                <option value="recipesunlock">配方需要解锁</option>
+                <option value="respawnblocksexplode">重生方块爆炸</option>
+                <option value="sendCommandFeedback">发送命令反馈</option>
+                <option value="showBorderEffect">边界发出红色粒子</option>
+                <option value="showCoordinates">聊天框显示玩家坐标</option>
+                <option value="showDeathMessages">显示死亡消息</option>
+                <option value="showrecipemessages">解锁新配方时显示消息</option>
+                <option value="showTags">展示物品的物品组件</option>
+                <option value="tntExplodes">TNT爆炸</option>
+            </select>
+        </div>
+        <input type="button" class="btn btn-blue" id="gamerule-submit" value="生成"></input>
+    </div>
+    </div>
+    <div class="box card card-body" id="difficult">
+        <p class="title text text-blue">游戏难度</p>
+        <div class="in btn-group" id="difficulty">
+            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="peaceful">和平</input>
+            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="easy">简单</input>
+            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="normal">普通</input>
+            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="hard">困难</input>
+        </div>
+        <input type="button" class="btn btn-blue" id="difficulty-submit" value="生成"></input>
+    </div>
+    </div>
+    <div class="box card card-body" id="spawn">
+        <p class="title text text-blue">出生点</p>
+        <div class="in btn-group" id="setspawn">
+            <select name="setspawn-select-1" id="setspawn-select-1">
+                <option value="">--请选择--</option>
+                <option value="/spawnpoint">玩家</option>
+                <option value="/setworldspawn">世界</option>
+            </select>
+            <input type="text" class="form-control" name="setspawn-text-1" placeholder="X 坐标"></input>
+            <input type="text" class="form-control" name="setspawn-text-2" placeholder="Y 坐标"></input>
+            <input type="text" class="form-control" name="setspawn-text-3" placeholder="Z 坐标"></input>
+            <input type="text" class="form-control" name="setspawn-text-4" placeholder="选择器(仅限玩家出生点)"></input>
+        </div>
+        <input type="button" class="btn btn-blue" id="setspawn-submit" value="生成"></input>
+    </div>
+    </div>
+    <div class="box card card-body" id="giving">
+        <p class="title text text-blue">给予物品</p>
+        <div class="in btn-group" id="give">
+            <input type="text" class="form-control" name="give-text-1" placeholder="选择器"></input>
+            <input class="form-control" list="items" name="give-itemlist-1" placeholder="物品">
+        </div>
+        <input type="button" class="btn btn-blue" id="give-submit" value="生成"></input>
+    </div>
+
+    <script>
+        var result = document.getElementById("result");
+
+        document.getElementById("gamemode-submit").onclick = function () {
+            var gamemodeList = document.getElementById("gamemode").children;
+            var string = "/gamemode ";
+            for (i = 0; i <= 2; i++) {
+                if (gamemodeList[i].checked == true) {
+                    string = string + gamemodeList[i].value;
+                    break;
+                }
+                else if (i == 2) {
+                    return;
+                }
+            }
+            result.innerText = string;
+        }
+
+        document.getElementById("gamerule-submit").onclick = function () {
+            var gameruleList = document.getElementById("gamerule").children;
+            var gameruleSelect = document.getElementById("gamerule-select-1").value;
+            var string = "/gamerule ";
+            if (gameruleSelect == "") {
+                return;
+            }
+            else {
+                string = string + gameruleSelect + " ";
+            }
+            for (i = 0; i <= 1; i++) {
+                if (gameruleList[i].checked == true) {
+                    string = string + gameruleList[i].value;
+                    break;
+                }
+                else if (i == 1) {
+                    return;
+                }
+            }
+            result.innerText = string;
+        }
+
+        document.getElementById("difficulty-submit").onclick = function () {
+            var difficultyList = document.getElementById("difficulty").children;
+            var string = "/difficulty ";
+            for (i = 0; i <= 3; i++) {
+                if (difficultyList[i].checked == true) {
+                    string = string + difficultyList[i].value;
+                    break;
+                }
+                else if (i == 3) {
+                    return;
+                }
+            }
+            result.innerText = string;
+        }
+
+        document.getElementById("setspawn-submit").onclick = function () {
+            var setspawnList = document.getElementById("setspawn").children;
+            var setspawnSelect = document.getElementById("setspawn-select-1").value;
+            if (setspawnSelect == "") {
+                return;
+            }
+            else {
+                var string = setspawnSelect;
+            }
+            if (setspawnSelect != "/setworldspawn") {
+                if (setspawnList[4] != "") {
+                    string = string + " " + setspawnList[4].value;
+                }
+                else {
+                    return;
+                }
+            }
+            for (i = 1; i <= 3; i++) {
+                if (setspawnList[i] != "") {
+                    string = string + " " + setspawnList[i].value;
+                }
+                else {
+                    return;
+                }
+            }
+            result.innerText = string;
+        }
+
+        document.getElementById("give-submit").onclick = function () {
+            var giveList = document.getElementById("give").children;
+            var string = "/give ";
+            if (giveList[0].value == "" || giveList[1].value == "") {
+                return;
+            }
+            string = string + " " + giveList[0].value + " " + giveList[1].value;
+            result.innerText = string;
+        }
+    </script>
+    <script src="https://cdn.pmine.org/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
