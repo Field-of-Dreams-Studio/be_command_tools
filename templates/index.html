@@ -7,6 +7,7 @@
 
     <link href="https://cdn.pmine.org/fdsprivate/pmine-bs.css" rel="stylesheet">
     <link href="https://cdn.pmine.org/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             padding-bottom: 100px;
@@ -29,15 +30,16 @@
             width: auto;
         } 
 
-        .title {
-            /* font-weight: bold; */
+        /* .title {
+            font-weight: bold;
             margin-top: -7px;
             font-size: large;
-        }
+        } */
     </style>
 </head>
 
 <body>
+    <!-- 物品列表 -->
     <datalist id="items">
         <option value="minecraft:oak_planks" label="橡木板">
         <option value="minecraft:spruce_planks" label="云杉木板">
@@ -1467,26 +1469,30 @@
         <option value="minecraft:armadillo_spawn_egg" label="犰狳生成蛋">
     </datalist>
 
-    <div class="box card card-body" id="show">
-        <p class="title text text-blue">命令输出</p>
+    <!-- 命令输出 -->
+    <div class="box container p-4 my-1 border rounded" id="show">
+        <h4 class="title text text-blue">命令输出</h4>
         <textarea id="result" class="form-control"></textarea>
     </div>
 
-    <div class="box card card-body" id="mode">
-        <p class="title text text-blue">游戏模式</p>
-        <div class="in btn-group" id="gamemode">
-            <input type="radio" class="btn btn-outline-blue" name="gamemode-radio-1" value="survival">生存</input>
-            <input type="radio" class="btn btn-outline-blue" name="gamemode-radio-1" value="creative">创造</input>
-            <input type="radio" class="btn btn-outline-blue" name="gamemode-radio-1" value="adventure">冒险</input>
+    <!-- 游戏模式 -->
+    <div class="box container p-4 my-1 border rounded" id="mode">
+        <h4 class="title text text-blue">游戏模式</h4>
+        <div class="in" id="gamemode">
+            <input type="radio" class="form-check-input" name="gamemode-radio-1" value="survival">生存</input>
+            <input type="radio" class="form-check-input" name="gamemode-radio-1" value="creative">创造</input>
+            <input type="radio" class="form-check-input" name="gamemode-radio-1" value="adventure">冒险</input>
         </div>
         <input type="button" class="btn btn-blue" id="gamemode-submit" value="生成"></input>
     </div>
     </div>
-    <div class="box card card-body" id="rule">
-        <p class="title text text-blue">游戏规则</p>
-        <div class="in btn-group" id="gamerule">
-            <input type="radio" class="btn btn-outline-blue" name="gamerule" value="true">启用</input>
-            <input type="radio" class="btn btn-outline-blue" name="gamerule" value="false">禁用</input>
+
+    <!-- 游戏模式 -->
+    <div class="box container p-4 my-1 border rounded" id="rule">
+        <h4 class="title text text-blue">游戏规则</h4>
+        <div class="in" id="gamerule">
+            <input type="radio" class="form-check-input" name="gamerule" value="true">启用</input>
+            <input type="radio" class="form-check-input" name="gamerule" value="false">禁用</input>
             <select name="gamerule-select-1" id="gamerule-select-1">
                 <option value="">--请选择--</option>
                 <option value="commandBlockOutput">广播命令方块输出</option>
@@ -1522,20 +1528,22 @@
         </div>
         <input type="button" class="btn btn-blue" id="gamerule-submit" value="生成"></input>
     </div>
-    </div>
-    <div class="box card card-body" id="difficult">
-        <p class="title text text-blue">游戏难度</p>
-        <div class="in btn-group" id="difficulty">
-            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="peaceful">和平</input>
-            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="easy">简单</input>
-            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="normal">普通</input>
-            <input type="radio" class="btn btn-outline-blue" name="difficulty-radio-1" value="hard">困难</input>
+
+    <!-- 游戏难度 -->
+    <div class="box container p-4 my-1 border rounded" id="difficult">
+        <h4 class="title text text-blue">游戏难度</h4>
+        <div class="in" id="difficulty">
+            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="peaceful">和平</input>
+            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="easy">简单</input>
+            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="normal">普通</input>
+            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="hard">困难</input>
         </div>
         <input type="button" class="btn btn-blue" id="difficulty-submit" value="生成"></input>
     </div>
-    </div>
-    <div class="box card card-body" id="spawn">
-        <p class="title text text-blue">出生点</p>
+
+    <!-- 出生点 -->
+    <div class="box container p-4 my-1 border rounded" id="spawn">
+        <h4 class="title text text-blue">出生点</h4>
         <div class="in btn-group" id="setspawn">
             <select name="setspawn-select-1" id="setspawn-select-1">
                 <option value="">--请选择--</option>
@@ -1549,9 +1557,10 @@
         </div>
         <input type="button" class="btn btn-blue" id="setspawn-submit" value="生成"></input>
     </div>
-    </div>
-    <div class="box card card-body" id="giving">
-        <p class="title text text-blue">给予物品</p>
+
+    <!-- 给予物品 -->
+    <div class="box container p-4 my-1 border rounded" id="giving">
+        <h4 class="title text text-blue">给予物品</h4>
         <div class="in btn-group" id="give">
             <input type="text" class="form-control" name="give-text-1" placeholder="选择器"></input>
             <input class="form-control" list="items" name="give-itemlist-1" placeholder="物品">
@@ -1560,8 +1569,10 @@
     </div>
 
     <script>
+        // 命令输出
         var result = document.getElementById("result");
 
+        // 游戏模式
         document.getElementById("gamemode-submit").onclick = function () {
             var gamemodeList = document.getElementById("gamemode").children;
             var string = "/gamemode ";
@@ -1577,6 +1588,7 @@
             result.innerText = string;
         }
 
+        // 游戏规则
         document.getElementById("gamerule-submit").onclick = function () {
             var gameruleList = document.getElementById("gamerule").children;
             var gameruleSelect = document.getElementById("gamerule-select-1").value;
@@ -1599,6 +1611,7 @@
             result.innerText = string;
         }
 
+        // 游戏难度
         document.getElementById("difficulty-submit").onclick = function () {
             var difficultyList = document.getElementById("difficulty").children;
             var string = "/difficulty ";
@@ -1614,6 +1627,7 @@
             result.innerText = string;
         }
 
+        // 出生点
         document.getElementById("setspawn-submit").onclick = function () {
             var setspawnList = document.getElementById("setspawn").children;
             var setspawnSelect = document.getElementById("setspawn-select-1").value;
@@ -1642,16 +1656,18 @@
             result.innerText = string;
         }
 
+        // 给予物品
         document.getElementById("give-submit").onclick = function () {
             var giveList = document.getElementById("give").children;
             var string = "/give ";
             if (giveList[0].value == "" || giveList[1].value == "") {
                 return;
             }
-            string = string + " " + giveList[0].value + " " + giveList[1].value;
+            string = string + giveList[0].value + " " + giveList[1].value;
             result.innerText = string;
         }
     </script>
+
     <script src="https://cdn.pmine.org/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 
