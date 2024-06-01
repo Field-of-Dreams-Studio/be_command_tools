@@ -28,7 +28,7 @@
             padding: 20px; */
             margin-bottom: 10px;
             width: auto;
-        } 
+        }
 
         /* .title {
             font-weight: bold;
@@ -1473,6 +1473,7 @@
     <div class="box container p-4 my-1 border rounded" id="show">
         <h4 class="title text text-blue">命令输出</h4>
         <textarea id="result" class="form-control"></textarea>
+        <input type="button" class="btn btn-blue" id="show-clear" value="清空">
     </div>
 
     <!-- 游戏模式 -->
@@ -1564,13 +1565,18 @@
         <div class="in btn-group" id="give">
             <input type="text" class="form-control" name="give-text-1" placeholder="选择器"></input>
             <input class="form-control" list="items" name="give-itemlist-1" placeholder="物品">
+            <input type="text" class="form-control" name="give-text-2" placeholder="数量"></input>
         </div>
         <input type="button" class="btn btn-blue" id="give-submit" value="生成"></input>
     </div>
 
     <script>
+
         // 命令输出
         var result = document.getElementById("result");
+        document.getElementById("show-clear").onclick = function () {
+            result.innerText = "";
+        }
 
         // 游戏模式
         document.getElementById("gamemode-submit").onclick = function () {
@@ -1664,6 +1670,9 @@
                 return;
             }
             string = string + giveList[0].value + " " + giveList[1].value;
+            if (giveList[2].value != "") {
+                string = string + " " + giveList[2].value;
+            }
             result.innerText = string;
         }
     </script>
