@@ -1,45 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
     <title>基岩版命令工具箱</title>
-
     <link href="https://cdn.pmine.org/fdsprivate/pmine-bs.css" rel="stylesheet">
     <link href="https://cdn.pmine.org/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
         body {
             padding-bottom: 100px;
         }
 
         #result {
-            /* min-width: 500px;
-            max-width: 2000px;
-            width: auto; */
             height: 300px;
             resize: none;
         }
 
         .box {
-            /* border: thick double #32a1ce;
-            border-radius: var(--bs-border-radius);
-            background-color: rgb(244, 244, 244);
-            padding: 20px; */
             margin-bottom: 10px;
-            width: auto;
         }
-
-        /* .title {
-            font-weight: bold;
-            margin-top: -7px;
-            font-size: large;
-        } */
     </style>
 </head>
 
 <body>
-    <!-- 物品列表 -->
     <datalist id="items">
         <option value="minecraft:oak_planks" label="橡木板">
         <option value="minecraft:spruce_planks" label="云杉木板">
@@ -1469,107 +1452,272 @@
         <option value="minecraft:armadillo_spawn_egg" label="犰狳生成蛋">
     </datalist>
 
-    <!-- 命令输出 -->
-    <div class="box container p-4 my-1 border rounded" id="show">
-        <h4 class="title text text-blue">命令输出</h4>
-        <textarea id="result" class="form-control"></textarea>
-        <input type="button" class="btn btn-blue" id="show-clear" value="清空">
+    <div class="container my-3">
+        <h1>基岩版命令工具箱</h1>
+        <hr>
     </div>
 
-    <!-- 游戏模式 -->
-    <div class="box container p-4 my-1 border rounded" id="mode">
-        <h4 class="title text text-blue">游戏模式</h4>
-        <div class="in" id="gamemode">
-            <input type="radio" class="form-check-input" name="gamemode-radio-1" value="survival">生存</input>
-            <input type="radio" class="form-check-input" name="gamemode-radio-1" value="creative">创造</input>
-            <input type="radio" class="form-check-input" name="gamemode-radio-1" value="adventure">冒险</input>
+    <div class="container my-3">
+        <!-- 命令输出 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">命令输出</h4>
+            <textarea id="result" class="form-control"></textarea>
+            <button class="btn btn-blue mt-2" id="show-clear">清空</button>
         </div>
-        <input type="button" class="btn btn-blue" id="gamemode-submit" value="生成"></input>
-    </div>
-    </div>
 
-    <!-- 游戏模式 -->
-    <div class="box container p-4 my-1 border rounded" id="rule">
-        <h4 class="title text text-blue">游戏规则</h4>
-        <div class="in" id="gamerule">
-            <input type="radio" class="form-check-input" name="gamerule" value="true">启用</input>
-            <input type="radio" class="form-check-input" name="gamerule" value="false">禁用</input>
-            <select name="gamerule-select-1" id="gamerule-select-1">
-                <option value="">--请选择--</option>
-                <option value="commandBlockOutput">广播命令方块输出</option>
-                <option value="commandBlocksEnabled">启用命令方块</option>
-                <option value="doDaylightCycle">游戏内时间流逝</option>
-                <option value="doEntityDrops">非生物实体掉落</option>
-                <option value="doFireTick">火焰蔓延</option>
-                <option value="doImmediateRespawn">立即重生</option>
-                <option value="doInsomnia">生成幻翼</option>
-                <option value="doLimitedCrafting">合成需要配方</option>
-                <option value="doMobLoot">生物战利品掉落</option>
-                <option value="doMobSpawning">生成生物</option>
-                <option value="doTileDrops">方块掉落</option>
-                <option value="doWeatherCycle">天气更替</option>
-                <option value="drowningDamage">溺水伤害</option>
-                <option value="fallDamage">摔落伤害</option>
-                <option value="fireDamage">火焰伤害</option>
-                <option value="freezeDamage">冰冻伤害</option>
-                <option value="keepInventory">死亡后保留物品栏</option>
-                <option value="mobGriefing">允许破坏性生物行为</option>
-                <option value="naturalRegeneration">生命值自然恢复</option>
-                <option value="projectilesCanBreakBlocks">弹射物能否破坏方块</option>
-                <option value="recipesunlock">配方需要解锁</option>
-                <option value="respawnblocksexplode">重生方块爆炸</option>
-                <option value="sendCommandFeedback">发送命令反馈</option>
-                <option value="showBorderEffect">边界发出红色粒子</option>
-                <option value="showCoordinates">聊天框显示玩家坐标</option>
-                <option value="showDeathMessages">显示死亡消息</option>
-                <option value="showrecipemessages">解锁新配方时显示消息</option>
-                <option value="showTags">展示物品的物品组件</option>
-                <option value="tntExplodes">TNT爆炸</option>
-            </select>
+        <!-- 游戏模式 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">游戏模式</h4>
+            <div id="gamemode">
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="gamemode-radio-1" value="survival">生存
+                </label>
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="gamemode-radio-1" value="creative">创造
+                </label>
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="gamemode-radio-1" value="adventure">冒险
+                </label>
+            </div>
+            <button class="btn btn-blue mt-2" id="gamemode-submit">生成</button>
         </div>
-        <input type="button" class="btn btn-blue" id="gamerule-submit" value="生成"></input>
-    </div>
 
-    <!-- 游戏难度 -->
-    <div class="box container p-4 my-1 border rounded" id="difficult">
-        <h4 class="title text text-blue">游戏难度</h4>
-        <div class="in" id="difficulty">
-            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="peaceful">和平</input>
-            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="easy">简单</input>
-            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="normal">普通</input>
-            <input type="radio" class="form-check-input" name="difficulty-radio-1" value="hard">困难</input>
+        <!-- 游戏规则 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">游戏规则</h4>
+            <div id="gamerule">
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="gamerule" value="true">启用
+                </label>
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="gamerule" value="false">禁用
+                </label>
+                <select name="gamerule-select-1" id="gamerule-select-1" class="form-select mt-2">
+                    <option value="">--请选择--</option>
+                    <option value="commandBlockOutput">广播命令方块输出</option>
+                    <option value="commandBlocksEnabled">启用命令方块</option>
+                    <option value="doDaylightCycle">游戏内时间流逝</option>
+                    <option value="doEntityDrops">非生物实体掉落</option>
+                    <option value="doFireTick">火焰蔓延</option>
+                    <option value="doImmediateRespawn">立即重生</option>
+                    <option value="doInsomnia">生成幻翼</option>
+                    <option value="doLimitedCrafting">合成需要配方</option>
+                    <option value="doMobLoot">生物战利品掉落</option>
+                    <option value="doMobSpawning">生成生物</option>
+                    <option value="doTileDrops">方块掉落</option>
+                    <option value="doWeatherCycle">天气更替</option>
+                    <option value="drowningDamage">溺水伤害</option>
+                    <option value="fallDamage">摔落伤害</option>
+                    <option value="fireDamage">火焰伤害</option>
+                    <option value="freezeDamage">冰冻伤害</option>
+                    <option value="keepInventory">死亡后保留物品栏</option>
+                    <option value="mobGriefing">允许破坏性生物行为</option>
+                    <option value="naturalRegeneration">生命值自然恢复</option>
+                    <option value="projectilesCanBreakBlocks">弹射物能否破坏方块</option>
+                    <option value="recipesunlock">配方需要解锁</option>
+                    <option value="respawnblocksexplode">重生方块爆炸</option>
+                    <option value="sendCommandFeedback">发送命令反馈</option>
+                    <option value="showBorderEffect">边界发出红色粒子</option>
+                    <option value="showCoordinates">聊天框显示玩家坐标</option>
+                    <option value="showDeathMessages">显示死亡消息</option>
+                    <option value="showrecipemessages">解锁新配方时显示消息</option>
+                    <option value="showTags">展示物品的物品组件</option>
+                    <option value="tntExplodes">TNT爆炸</option>
+                </select>
+            </div>
+            <button class="btn btn-blue mt-2" id="gamerule-submit">生成</button>
         </div>
-        <input type="button" class="btn btn-blue" id="difficulty-submit" value="生成"></input>
-    </div>
 
-    <!-- 出生点 -->
-    <div class="box container p-4 my-1 border rounded" id="spawn">
-        <h4 class="title text text-blue">出生点</h4>
-        <div class="in btn-group" id="setspawn">
-            <select name="setspawn-select-1" id="setspawn-select-1">
-                <option value="">--请选择--</option>
-                <option value="/spawnpoint">玩家</option>
-                <option value="/setworldspawn">世界</option>
-            </select>
-            <input type="text" class="form-control" name="setspawn-text-1" placeholder="X 坐标"></input>
-            <input type="text" class="form-control" name="setspawn-text-2" placeholder="Y 坐标"></input>
-            <input type="text" class="form-control" name="setspawn-text-3" placeholder="Z 坐标"></input>
-            <input type="text" class="form-control" name="setspawn-text-4" placeholder="选择器(仅限玩家出生点)"></input>
+        <!-- 游戏难度 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">游戏难度</h4>
+            <div id="difficulty">
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="difficulty-radio-1" value="peaceful">和平
+                </label>
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="difficulty-radio-1" value="easy">简单
+                </label>
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="difficulty-radio-1" value="normal">普通
+                </label>
+                <label class="form-check">
+                    <input type="radio" class="form-check-input" name="difficulty-radio-1" value="hard">困难
+                </label>
+            </div>
+            <button class="btn btn-blue mt-2" id="difficulty-submit">生成</button>
         </div>
-        <input type="button" class="btn btn-blue" id="setspawn-submit" value="生成"></input>
-    </div>
 
-    <!-- 给予物品 -->
-    <div class="box container p-4 my-1 border rounded" id="giving">
-        <h4 class="title text text-blue">给予物品</h4>
-        <div class="in btn-group" id="give">
-            <input type="text" class="form-control" name="give-text-1" placeholder="选择器"></input>
-            <input class="form-control" list="items" name="give-itemlist-1" placeholder="物品">
-            <input type="text" class="form-control" name="give-text-2" placeholder="数量"></input>
+        <!-- 出生点 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">出生点</h4>
+            <div id="setspawn" class="btn-group">
+                <select name="setspawn-select-1" id="setspawn-select-1" class="form-select">
+                    <option value="">--请选择--</option>
+                    <option value="/spawnpoint">玩家</option>
+                    <option value="/setworldspawn">世界</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="setspawn-text-1" placeholder="X 坐标">
+                <input type="text" class="form-control mt-2" name="setspawn-text-2" placeholder="Y 坐标">
+                <input type="text" class="form-control mt-2" name="setspawn-text-3" placeholder="Z 坐标">
+                <input type="text" class="form-control mt-2" name="setspawn-text-4" placeholder="选择器(仅限玩家出生点)">
+            </div>
+            <button class="btn btn-blue mt-2" id="setspawn-submit">生成</button>
         </div>
-        <input type="button" class="btn btn-blue" id="give-submit" value="生成"></input>
+
+        <!-- 给予物品 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">给予物品</h4>
+            <div id="give" class="btn-group">
+                <input type="text" class="form-control mt-2" name="give-text-1" placeholder="选择器">
+                <input class="form-control mt-2" list="items" name="give-itemlist-1" placeholder="物品">
+                <input type="text" class="form-control mt-2" name="give-text-2" placeholder="数量">
+            </div>
+            <button class="btn btn-blue mt-2" id="give-submit">生成</button>
+        </div>
+
+        <!-- 状态效果 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">状态效果</h4>
+            <div id="potion-effect">
+                <input type="text" class="form-control mt-2" id="potion-selector" placeholder="选择器">
+                <select id="potion-type" class="form-select mt-2">
+                    <option value="">--选择状态效果--</option>
+                    <option value="speed">速度</option>
+                    <option value="slowness">缓慢</option>
+                    <option value="haste">急迫</option>
+                    <option value="mining_fatigue">挖掘疲劳</option>
+                    <option value="strength">力量</option>
+                    <option value="instant_health">瞬间治疗</option>
+                    <option value="instant_damage">瞬间伤害</option>
+                    <option value="jump_boost">跳跃提升</option>
+                    <option value="nausea">反胃</option>
+                    <option value="regeneration">生命恢复</option>
+                    <option value="resistance">抗性提升</option>
+                    <option value="fire_resistance">抗火</option>
+                    <option value="water_breathing">水下呼吸</option>
+                    <option value="invisibility">隐身</option>
+                    <option value="blindness">失明</option>
+                    <option value="night_vision">夜视</option>
+                    <option value="hunger">饥饿</option>
+                    <option value="weakness">虚弱</option>
+                    <option value="poison">中毒</option>
+                    <option value="wither">凋零</option>
+                    <option value="health_boost">生命提升</option>
+                    <option value="absorption">伤害吸收</option>
+                    <option value="saturation">饱和</option>
+                    <option value="levitation">飘浮</option>
+                    <option value="fatal_poison">中毒（致命）</option>
+                    <option value="conduit_power">潮涌能量</option>
+                    <option value="slow_falling">缓降</option>
+                    <option value="bad_omen">不祥之兆</option>
+                    <option value="village_hero">村庄英雄</option>
+                    <option value="darkness">黑暗</option>
+                </select>
+                <input type="number" min="0" max="255" class="form-control mt-2" id="potion-duration"
+                    placeholder="持续时间(秒)">
+                <input type="number" min="0" max="255" class="form-control mt-2" id="potion-amplifier"
+                    placeholder="放大器等级">
+                <div class="mt-2">
+                    <label class="form-check">
+                        <input type="checkbox" id="potion-hide-particles" class="form-check-input">
+                        <span class="form-check-label">隐藏粒子效果</span>
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-blue mt-2" id="potion-submit">生成</button>
+        </div>
+
+        <!-- 附魔效果 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">附魔效果</h4>
+            <div id="enchant-effect">
+                <input type="text" class="form-control mt-2" id="enchant-selector" placeholder="选择器">
+                <select id="enchant-enchantment" class="form-select mt-2">
+                    <option value="">--选择附魔效果--</option>
+                    <option value="protection">保护</option>
+                    <option value="fire_protection">火焰保护</option>
+                    <option value="feather_falling">摔落缓冲</option>
+                    <option value="blast_protection">爆炸保护</option>
+                    <option value="projectile_protection">弹射物保护</option>
+                    <option value="thorns">荆棘</option>
+                    <option value="respiration">水下呼吸</option>
+                    <option value="depth_strider">深海探索者</option>
+                    <option value="aqua_affinity">水下速掘</option>
+                    <option value="sharpness">锋利</option>
+                    <option value="smite">亡灵杀手</option>
+                    <option value="bane_of_arthropods">节肢杀手</option>
+                    <option value="knockback">击退</option>
+                    <option value="fire_aspect">火焰附加</option>
+                    <option value="looting">抢夺</option>
+                    <option value="efficiency">效率</option>
+                    <option value="silk_touch">精准采集</option>
+                    <option value="unbreaking">耐久</option>
+                    <option value="fortune">时运</option>
+                    <option value="power">力量</option>
+                    <option value="punch">冲击</option>
+                    <option value="flame">火矢</option>
+                    <option value="infinity">无限</option>
+                    <option value="luck_of_the_sea">海之眷顾</option>
+                    <option value="lure">饵钓</option>
+                    <option value="frost_walker">冰霜行者</option>
+                    <option value="mending">经验修补</option>
+                    <option value="binding_curse">绑定诅咒</option>
+                    <option value="vanishing_curse">消失诅咒</option>
+                    <option value="impaling">穿刺</option>
+                    <option value="riptide">激流</option>
+                    <option value="loyalty">忠诚</option>
+                    <option value="channeling">引雷</option>
+                    <option value="multishot">多重射击</option>
+                    <option value="piercing">穿透</option>
+                    <option value="quick_charge">快速装填</option>
+                    <option value="soul_speed">灵魂疾行</option>
+                    <option value="swift_sneak">迅捷潜行</option>
+                    <option value="wind_burst">风爆</option>
+                    <option value="density">致密</option>
+                    <option value="breach">破甲</option>
+                </select>
+                <input type="number" class="form-control mt-2" id="enchant-level" placeholder="附魔等级">
+            </div>
+            <button class="btn btn-blue mt-2" id="enchant-submit">生成</button>
+        </div>
+
+        <!-- 放置方块 -->
+        <div class="box border rounded p-4">
+            <h4 class="text-blue">放置方块</h4>
+            <div id="setblock-command">
+                <div class="mb-2">
+                    <input type="number" class="form-control" id="setblock-x" placeholder="X坐标">
+                </div>
+                <div class="mb-2">
+                    <input type="number" class="form-control" id="setblock-y" placeholder="Y坐标">
+                </div>
+                <div class="mb-2">
+                    <input type="number" class="form-control" id="setblock-z" placeholder="Z坐标">
+                </div>
+                <div class="mb-2">
+                    <input class="form-control mt-2" list="items" id="setblock-tileName" name="setblock-tileName" placeholder="方块名称">
+                </div>
+                <div class="mb-2">
+                    <input type="text" class="form-control" id="setblock-blockStates" placeholder="方块状态(暂不支持)" disabled>
+                </div>
+                <div class="mb-2">
+                    <label for="setblock-mode" class="form-label">模式</label>
+                    <select id="setblock-mode" class="form-select">
+                        <option value="">默认 (replace)</option>
+                        <option value="destroy">destroy</option>
+                        <option value="keep">keep</option>
+                        <option value="replace">replace</option>
+                    </select>
+                </div>
+                <button class="btn btn-blue" id="setblock-submit">生成命令</button>
+            </div>
+        </div>
+
+
     </div>
 
+    <script src="https://cdn.pmine.org/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
 
         // 命令输出
@@ -1583,8 +1731,8 @@
             var gamemodeList = document.getElementById("gamemode").children;
             var string = "/gamemode ";
             for (i = 0; i <= 2; i++) {
-                if (gamemodeList[i].checked == true) {
-                    string = string + gamemodeList[i].value;
+                if (gamemodeList[i].children[0].checked == true) {
+                    string = string + gamemodeList[i].children[0].value;
                     break;
                 }
                 else if (i == 2) {
@@ -1606,8 +1754,8 @@
                 string = string + gameruleSelect + " ";
             }
             for (i = 0; i <= 1; i++) {
-                if (gameruleList[i].checked == true) {
-                    string = string + gameruleList[i].value;
+                if (gameruleList[i].children[0].checked == true) {
+                    string = string + gameruleList[i].children[0].value;
                     break;
                 }
                 else if (i == 1) {
@@ -1675,9 +1823,64 @@
             }
             result.innerText = string;
         }
-    </script>
 
-    <script src="https://cdn.pmine.org/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+        // 状态效果
+        document.getElementById("potion-submit").onclick = function () {
+            var selector = document.getElementById("potion-selector").value;
+            var potionType = document.getElementById("potion-type").value;
+            var duration = document.getElementById("potion-duration").value;
+            var amplifier = document.getElementById("potion-amplifier").value;
+            var hideParticles = document.getElementById("potion-hide-particles").checked ? "true" : "false";
+
+            if (!selector || !potionType || !duration) {
+                return;
+            }
+
+            var string = `/effect ${selector} ${potionType} ${duration}`;
+            if (amplifier) {
+                string += ` ${amplifier}`;
+            }
+            if (hideParticles === "true") {
+                string += " true";
+            }
+
+            result.innerText = string;
+        };
+
+        // 附魔效果
+        document.getElementById("enchant-submit").onclick = function () {
+            var selector = document.getElementById("enchant-selector").value;
+            var enchantment = document.getElementById("enchant-enchantment").value;
+            var level = document.getElementById("enchant-level").value;
+
+            if (!selector || !enchantment || !level) {
+                return;
+            }
+
+            var command = `/enchant ${selector} ${enchantment} ${level}`;
+
+            result.innerText = command;
+        };
+
+        //放置方块
+        document.getElementById("setblock-submit").onclick = function () {
+            var x = document.getElementById("setblock-x").value.trim();
+            var y = document.getElementById("setblock-y").value.trim();
+            var z = document.getElementById("setblock-z").value.trim();
+            var tileName = document.getElementById("setblock-tileName").value.trim();
+            var mode = document.getElementById("setblock-mode").value.trim();
+
+            var command = `/setblock ${x} ${y} ${z} ${tileName}`;
+
+            if (mode) {
+                command += ` ${mode}`;
+            }
+
+            result.textContent = command;
+        };
+
+
+    </script>
 </body>
 
 </html>
